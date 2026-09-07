@@ -44,10 +44,12 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         get => _selectedAgent;
         set
         {
-            if (Property != null)
+            if (SetProperty(ref _selectedAgent, value))
             {
-                _selectedAgent = value;
-                Property.AgentId = _selectedAgent?.Id;
+                if (Property != null)
+                {
+                    Property.AgentId = _selectedAgent?.Id;
+                }
             }
         }
     }
