@@ -84,6 +84,35 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         }
     }
 
+    private Command getCurrentLocationCommand;
+    public ICommand GetCurrentLocationCommand => getCurrentLocationCommand ??= new Command(async () => await GetCurrentLocation());
+    private async Task GetCurrentLocation()
+    {
+        try
+        {
+            var request = new GeolocationRequest(
+                GeolocationAccuracy.Best,
+                TimeSpan.FromSeconds(10));
+
+            Location location = await Geolocation.GetLocationAsync(request);
+
+            if (location == null)
+            {
+                return;
+            }
+
+            Property.Latitude = location.Latitude;
+            Property.Longitude = location.Longitude;
+
+            OnPropertyChanged(nameof(Property));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unable to get location: {ex.Message}");
+        }
+    }
+
+
     public bool IsValid()
     {
         if (string.IsNullOrEmpty(Property.Address)
