@@ -25,8 +25,8 @@ public class PropertyListPageViewModel : BaseViewModel
         set => SetProperty(ref isRefreshing, value);
     }
 
-    //private Command getPropertiesCommand;
-    //public ICommand GetPropertiesCommand => getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
+    private Command getPropertiesCommand;
+    public ICommand GetPropertiesCommand => getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
 
     async Task GetPropertiesAsync()
     {
@@ -35,6 +35,7 @@ public class PropertyListPageViewModel : BaseViewModel
         try
         {
             IsBusy = true;
+            IsRefreshing = true;
 
             List<Property> properties = service.GetProperties();
 
@@ -56,6 +57,9 @@ public class PropertyListPageViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
+
+    private Command goToDetailsCommand;
+    public ICommand GoToDetailsCommand => goToDetailsCommand ??= new Command<PropertyListItem>(async (propertyListItem) => await GoToDetails(propertyListItem));
 
 
     async Task GoToDetails(PropertyListItem propertyListItem)
