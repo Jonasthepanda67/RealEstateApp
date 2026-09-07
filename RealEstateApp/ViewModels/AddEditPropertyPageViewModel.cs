@@ -31,9 +31,10 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             SetProperty(ref _property, value);
             Title = Mode == "newproperty" ? "Add Property" : "Edit Property";
 
-            if (_property.AgentId != null)
+            if (_property?.AgentId != null)
             {
-                SelectedAgent = Agents.FirstOrDefault(x => x.Id == _property?.AgentId);
+                SelectedAgent = Agents.FirstOrDefault(
+                    x => x.Id == _property.AgentId);
             }
         }
     }
@@ -69,6 +70,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     }
     #endregion
 
+    #region Saving
 
     private Command savePropertyCommand;
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
@@ -86,6 +88,112 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         }
     }
 
+    #endregion
+
+    #region Location
+
+    private Command getCurrentLocationCommand;
+    public ICommand GetCurrentLocationCommand =>
+        getCurrentLocationCommand ??= new Command(
+            async () => await GetCurrentLocation());
+
+    private async Task GetCurrentLocation()
+    {
+        try
+        {
+            var request = new GeolocationRequest(
+                GeolocationAccuracy.Best,
+                TimeSpan.FromSeconds(10));
+
+            Location location = await Geolocation.GetLocationAsync(request);
+
+            if (location == null)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Location unavailable",
+                    "Unable to determine your current location.",
+                    "OK");
+
+                return;
+            }
+
+            Property.Latitude = location.Latitude;
+            Property.Longitude = location.Longitude;
+
+            IEnumerable<Placemark> placemarks =
+            await Geocoding.Default.GetPlacemarksAsync(location);
+
+            Placemark placemark = placemarks?.FirstOrDefault();
+
+            if (placemark != null)
+            {
+                Property.Address = BuildAddress(placemark);
+            }
+
+            OnPropertyChanged(nameof(Property));
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert(
+                "Location Error",
+                $"Unable to get your current location.\n\n{ex.Message}",
+                "OK");
+        }
+    }
+    private Command geocodeAddressCommand;
+    public ICommand GeocodeAddressCommand =>
+        geocodeAddressCommand ??= new Command(
+            async () => await GeocodeAddress());
+
+    private async Task GeocodeAddress()
+    {
+        try
+        {
+            // Make sure an address was entered
+            if (Property == null || string.IsNullOrWhiteSpace(Property.Address))
+            {
+                await Shell.Current.DisplayAlert(
+                    "Address required",
+                    "Please enter an address first.",
+                    "OK");
+
+                return;
+            }
+
+            // Geocode the entered address
+            IEnumerable<Location> locations =
+                await Geocoding.Default.GetLocationsAsync(Property.Address);
+
+            Location location = locations?.FirstOrDefault();
+
+            if (location == null)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Address not found",
+                    "Unable to find the location for the entered address.",
+                    "OK");
+
+                return;
+            }
+
+            // Save coordinates
+            Property.Latitude = location.Latitude;
+            Property.Longitude = location.Longitude;
+
+            // Notify the UI
+            OnPropertyChanged(nameof(Property));
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert(
+                "Geocoding Error",
+                $"Unable to find the location for this address.\n\n{ex.Message}",
+                "OK");
+        }
+    }
+
+    #endregion
+
     public bool IsValid()
     {
         if (string.IsNullOrEmpty(Property.Address)
@@ -98,4 +206,29 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     private Command cancelSaveCommand;
     public ICommand CancelSaveCommand => cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
+
+    #region HelperMethods
+
+    private string BuildAddress(Placemark placemark)
+    {
+        var addressParts = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(placemark.Thoroughfare))
+            addressParts.Add(placemark.Thoroughfare);
+
+        if (!string.IsNullOrWhiteSpace(placemark.SubThoroughfare))
+            addressParts.Add(placemark.SubThoroughfare);
+
+        if (!string.IsNullOrWhiteSpace(placemark.PostalCode))
+            addressParts.Add(placemark.PostalCode);
+
+        if (!string.IsNullOrWhiteSpace(placemark.Locality))
+            addressParts.Add(placemark.Locality);
+
+        if (!string.IsNullOrWhiteSpace(placemark.CountryName))
+            addressParts.Add(placemark.CountryName);
+
+        return string.Join(", ", addressParts);
+    }
+    #endregion
 }
