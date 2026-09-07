@@ -9,6 +9,8 @@ namespace RealEstateApp.ViewModels;
 public class PropertyListPageViewModel : BaseViewModel
 {
     public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new();
+    private Location _currentLocation;
+    private bool sortFurthestFirst = false;
 
     private readonly IPropertyService service;
 
@@ -37,18 +39,38 @@ public class PropertyListPageViewModel : BaseViewModel
             IsBusy = true;
             IsRefreshing = true;
 
+            await GetUserLocationAsync();
+
             List<Property> properties = service.GetProperties();
 
-            if (PropertiesCollection.Count != 0)
-                PropertiesCollection.Clear();
+            PropertiesCollection.Clear();
 
             foreach (Property property in properties)
-                PropertiesCollection.Add(new PropertyListItem(property));
+            {
+                var item = new PropertyListItem(property);
+
+                if (_currentLocation != null &&
+                    property.Latitude.HasValue &&
+                    property.Longitude.HasValue)
+                {
+                    Location propertyLocation = new Location(
+                        property.Latitude.Value,
+                        property.Longitude.Value);
+
+                    item.Distance = _currentLocation.CalculateDistance(
+                        propertyLocation,
+                        DistanceUnits.Kilometers);
+                }
+
+                PropertiesCollection.Add(item);
+            }
+
+            SortProperties();
 
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unable to get monkeys: {ex.Message}");
+            Debug.WriteLine($"Unable to get properties: {ex.Message}");
             await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
         }
         finally
@@ -58,6 +80,82 @@ public class PropertyListPageViewModel : BaseViewModel
         }
     }
 
+    #region Location
+
+    private async Task GetUserLocationAsync()
+    {
+        try
+        {
+            Location location = await Geolocation.GetLastKnownLocationAsync();
+
+            if (location == null)
+            {
+                var request = new GeolocationRequest(
+                    GeolocationAccuracy.Best,
+                    TimeSpan.FromSeconds(10));
+
+                location = await Geolocation.GetLocationAsync(request);
+            }
+
+            _currentLocation = location;
+
+            if (_currentLocation == null)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Location unavailable",
+                    "Unable to determine your current location.",
+                    "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to get location: {ex.Message}");
+
+            await Shell.Current.DisplayAlert(
+                "Location Error",
+                "Unable to determine your current location.",
+                "OK");
+        }
+    }
+
+    #endregion
+
+    #region Sorting
+    private Command sortCommand;
+    public ICommand SortCommand => sortCommand ??= new Command(async () => await SortAsync());
+
+    async Task SortAsync()
+    {
+        if (IsBusy)
+            return;
+
+        sortFurthestFirst = !sortFurthestFirst;
+
+        SortProperties();
+    }
+
+    private void SortProperties()
+    {
+        var sorted = sortFurthestFirst
+            ? PropertiesCollection
+                .OrderByDescending(x => x.Distance ?? double.MinValue)
+                .ToList()
+            : PropertiesCollection
+                .OrderBy(x => x.Distance ?? double.MaxValue)
+                .ToList();
+
+        PropertiesCollection.Clear();
+
+        foreach (var item in sorted)
+        {
+            PropertiesCollection.Add(item);
+        }
+    }
+
+    #endregion
+
+
+    #region Navigation
     private Command goToDetailsCommand;
     public ICommand GoToDetailsCommand => goToDetailsCommand ??= new Command<PropertyListItem>(async (propertyListItem) => await GoToDetails(propertyListItem));
 
@@ -82,4 +180,5 @@ public class PropertyListPageViewModel : BaseViewModel
             {"MyProperty", new Property() }
         });
     }
+    #endregion
 }
