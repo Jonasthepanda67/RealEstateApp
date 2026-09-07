@@ -1063,5 +1063,6 @@
 		public const string Virus = "\uf974";
 		public const string VirusSlash = "\uf975";
 		public const string Viruses = "\uf976";
-	}
+
+    }
 }

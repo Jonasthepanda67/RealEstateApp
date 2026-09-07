@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace RealEstateApp.Models
+﻿namespace RealEstateApp.Models
 {
     public class Property
     {
@@ -13,9 +10,12 @@ namespace RealEstateApp.Models
         }
 
         public string Id { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
         public int? Price { get; set; }
         public string Description { get; set; }
+        public PropertyType Type { get; set; }
+        public PropertyTier Tier { get; set; }
         public int? Beds { get; set; }
         public int? Baths { get; set; }
         public int? Parking { get; set; }
