@@ -94,4 +94,59 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
 	</ItemGroup>
 
+	<Target Name="GeneratePropertyImageCatalog" BeforeTargets="BeforeCompile">
+
+		<ItemGroup>
+			<PropertyImages Include="$(MSBuildProjectDirectory)/Resources/Images/*.jpg" />
+			<PropertyImages Include="$(MSBuildProjectDirectory)/Resources/Images/*.jpeg" />
+			<PropertyImages Include="$(MSBuildProjectDirectory)/Resources/Images/*.png" />
+		</ItemGroup>
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="namespace RealEstateApp%3B"
+			Overwrite="true" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="public static class GeneratedPropertyImages"
+			Overwrite="false" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="{"
+			Overwrite="false" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="    public static readonly string[] All = new string[]"
+			Overwrite="false" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="    {"
+			Overwrite="false" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="@(PropertyImages->'        &quot;%(Filename)%(Extension)&quot;,')"
+			Overwrite="false" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="    }%3B"
+			Overwrite="false" />
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)GeneratedPropertyImages.cs"
+			Lines="}"
+			Overwrite="false" />
+
+		<ItemGroup>
+			<Compile Include="$(IntermediateOutputPath)GeneratedPropertyImages.cs" />
+		</ItemGroup>
+
+	</Target>
+
+
 </Project>
