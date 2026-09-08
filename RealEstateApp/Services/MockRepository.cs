@@ -13,9 +13,11 @@ namespace RealEstateApp.Repositories
 
         private List<Agent> _agents;
         private List<Property> _properties;
+        private List<BarometerMeasurement> _measurements;
 
         public List<Agent> GetAgents() => _agents;
         public List<Property> GetProperties() => _properties;
+        public List<BarometerMeasurement> GetMeasurements() => _measurements;
 
         public void SaveProperty(Property property)
         {
