@@ -70,7 +70,6 @@
 
                         </VerticalStackLayout>
 
-
                         <Button Grid.Column="2"
                             Command="{Binding GetCurrentLocationCommand}"
                             FontFamily="FA-solid"
@@ -84,7 +83,8 @@
                             FontFamily="FA-solid"
                             FontSize="Medium"
                             Text="{Static fa:IconFont.Home}"
-                            VerticalOptions="Center" />
+                            VerticalOptions="Center"
+                            IsVisible="{Binding IsGeocodeAddressButtonVisible}"/>
 
                     </Grid>
 
