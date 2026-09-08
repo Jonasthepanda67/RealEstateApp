@@ -350,6 +350,46 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     #endregion
 
+    #region Flashlight
+
+    public bool IsFlashlightOn { get; set; }
+    private Command flashlightCommand;
+    public ICommand FlashlightCommand =>
+        flashlightCommand ??= new Command(
+            async () => await FlashlightAsync());
+    public async Task FlashlightAsync()
+    {
+        try
+        {
+            if (IsFlashlightOn)
+            {
+                await Flashlight.Default.TurnOffAsync();
+                IsFlashlightOn = false;
+            }
+            else
+            {
+                await Flashlight.Default.TurnOnAsync();
+                IsFlashlightOn = true;
+            }
+        }
+        catch (FeatureNotSupportedException)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Flashlight not supported",
+                "Flashlight is not supported on this device.",
+                "OK");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Flashlight error",
+                $"An error occurred while trying to turn on the flashlight.\n\n{ex.Message}",
+                "OK");
+        }
+    }
+
+    #endregion
+
     #region HelperMethods
 
     private string BuildAddress(Placemark placemark)
