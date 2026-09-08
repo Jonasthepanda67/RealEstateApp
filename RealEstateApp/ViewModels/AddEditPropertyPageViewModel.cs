@@ -9,12 +9,16 @@ namespace RealEstateApp.ViewModels;
 [QueryProperty(nameof(Property), "MyProperty")]
 public class AddEditPropertyPageViewModel : BaseViewModel
 {
+    public bool IsGeocodeAddressButtonVisible { get; set; }
     readonly IPropertyService service;
 
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
         this.service = service;
         Agents = new ObservableCollection<Agent>(service.GetAgents());
+
+        Connectivity.ConnectivityChanged += OnConnectivityChanged;
+        _ = CheckConnection();
     }
 
     public string Mode { get; set; }
@@ -109,7 +113,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
             if (location == null)
             {
-                await Shell.Current.DisplayAlert(
+                await Shell.Current.DisplayAlertAsync(
                     "Location unavailable",
                     "Unable to determine your current location.",
                     "OK");
@@ -134,7 +138,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert(
+            await Shell.Current.DisplayAlertAsync(
                 "Location Error",
                 $"Unable to get your current location.\n\n{ex.Message}",
                 "OK");
@@ -149,10 +153,9 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         try
         {
-            // Make sure an address was entered
             if (Property == null || string.IsNullOrWhiteSpace(Property.Address))
             {
-                await Shell.Current.DisplayAlert(
+                await Shell.Current.DisplayAlertAsync(
                     "Address required",
                     "Please enter an address first.",
                     "OK");
@@ -160,7 +163,6 @@ public class AddEditPropertyPageViewModel : BaseViewModel
                 return;
             }
 
-            // Geocode the entered address
             IEnumerable<Location> locations =
                 await Geocoding.Default.GetLocationsAsync(Property.Address);
 
@@ -168,7 +170,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
             if (location == null)
             {
-                await Shell.Current.DisplayAlert(
+                await Shell.Current.DisplayAlertAsync(
                     "Address not found",
                     "Unable to find the location for the entered address.",
                     "OK");
@@ -176,20 +178,48 @@ public class AddEditPropertyPageViewModel : BaseViewModel
                 return;
             }
 
-            // Save coordinates
             Property.Latitude = location.Latitude;
             Property.Longitude = location.Longitude;
 
-            // Notify the UI
             OnPropertyChanged(nameof(Property));
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert(
+            await Shell.Current.DisplayAlertAsync(
                 "Geocoding Error",
                 $"Unable to find the location for this address.\n\n{ex.Message}",
                 "OK");
         }
+    }
+
+    #endregion
+
+    #region Connection
+    private async void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    {
+        await CheckConnection();
+    }
+    private async Task CheckConnection()
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            IsGeocodeAddressButtonVisible = false;
+
+            await Shell.Current.DisplayAlertAsync(
+                "No internet connection",
+                "You are not connected to the internet.",
+                "OK");
+        }
+        else
+        {
+            IsGeocodeAddressButtonVisible = true;
+
+            await Shell.Current.DisplayAlertAsync(
+                "Connected to the internet",
+                "You are connected to the internet.",
+                "OK");
+        }
+        OnPropertyChanged(nameof(IsGeocodeAddressButtonVisible));
     }
 
     #endregion
