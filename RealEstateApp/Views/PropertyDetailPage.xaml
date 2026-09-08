@@ -236,12 +236,31 @@
 
                 </Grid>
 
-
-                <Label
+                <HorizontalStackLayout>
+                    
+                    <Label
                     Margin="0,15,0,0"
                     FontAttributes="Bold"
                     FontSize="17"
                     Text="Description" />
+                    
+                    <Button
+                        Margin="10,15,0,0"
+                        Command="{Binding TTSStartCommand}"
+                        FontFamily="FA-solid"
+                        FontSize="15"
+                        Text="{x:Static fa:IconFont.Play}"
+                        IsVisible="{Binding TTSIsNotPlaying}" />
+
+                    <Button
+                        Margin="10,15,0,0"
+                        Command="{Binding TTSStopCommand}"
+                        FontFamily="FA-solid"
+                        FontSize="15"
+                        Text="{x:Static fa:IconFont.Stop}"
+                        IsVisible="{Binding TTSIsPlaying}" />
+
+                </HorizontalStackLayout>
 
                 <Label
                     FontSize="14"

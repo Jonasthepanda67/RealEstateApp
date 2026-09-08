@@ -9,21 +9,24 @@ namespace RealEstateApp.ViewModels;
 [QueryProperty(nameof(Property), "MyProperty")]
 public class AddEditPropertyPageViewModel : BaseViewModel
 {
-    public bool IsGeocodeAddressButtonVisible { get; set; }
-    readonly IPropertyService service;
+    private readonly IPropertyService service;
 
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
         this.service = service;
         Agents = new ObservableCollection<Agent>(service.GetAgents());
 
+
+        Battery.BatteryInfoChanged += OnBatteryInfoChanged;
+        Battery.EnergySaverStatusChanged += OnEnergySaverStatusChanged;
         Connectivity.ConnectivityChanged += OnConnectivityChanged;
         _ = CheckConnection();
+        _ = BatteryStatusCheck();
     }
 
     public string Mode { get; set; }
 
-    #region PROPERTIES
+    #region Properties
     public ObservableCollection<Agent> Agents { get; }
 
     private Property _property;
@@ -110,6 +113,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     #region Location
 
+    public bool IsGeocodeAddressButtonVisible { get; set; }
     private Command getCurrentLocationCommand;
     public ICommand GetCurrentLocationCommand =>
         getCurrentLocationCommand ??= new Command(
@@ -310,6 +314,79 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         }
     }
 
+
+    #endregion
+
+    #region Battery
+
+    private async void OnBatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e) => await BatteryStatusCheck();
+    private async void OnEnergySaverStatusChanged(object sender, EnergySaverStatusChangedEventArgs e) => await BatteryStatusCheck();
+    private async Task BatteryStatusCheck()
+    {
+        if (Battery.ChargeLevel < 0.2)
+        {
+            StatusColor = Colors.Red;
+            StatusMessage = "Battery is low. Please charge your device.";
+        }
+        else if (Battery.State == BatteryState.Charging)
+        {
+            StatusColor = Colors.Orange;
+            StatusMessage = "Battery is charging.";
+        }
+        else
+        {
+            StatusColor = Colors.Green;
+            StatusMessage = "";
+        }
+
+            if (Battery.EnergySaverStatus == EnergySaverStatus.On)
+        {
+            StatusColor = Colors.Green;
+            StatusMessage = "Energy saver is on. Some features may be limited.";
+        }
+        else
+            StatusMessage = "";
+    }
+
+    #endregion
+
+    #region Flashlight
+
+    public bool IsFlashlightOn { get; set; }
+    private Command flashlightCommand;
+    public ICommand FlashlightCommand =>
+        flashlightCommand ??= new Command(
+            async () => await FlashlightAsync());
+    public async Task FlashlightAsync()
+    {
+        try
+        {
+            if (IsFlashlightOn)
+            {
+                await Flashlight.Default.TurnOffAsync();
+                IsFlashlightOn = false;
+            }
+            else
+            {
+                await Flashlight.Default.TurnOnAsync();
+                IsFlashlightOn = true;
+            }
+        }
+        catch (FeatureNotSupportedException)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Flashlight not supported",
+                "Flashlight is not supported on this device.",
+                "OK");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Flashlight error",
+                $"An error occurred while trying to turn on the flashlight.\n\n{ex.Message}",
+                "OK");
+        }
+    }
 
     #endregion
 

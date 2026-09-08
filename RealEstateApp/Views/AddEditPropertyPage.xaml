@@ -13,6 +13,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding CancelSaveCommand}" Text="Cancel" />
         <ToolbarItem Command="{Binding SavePropertyCommand}" Text="Save" />
+        <ToolbarItem Command="{Binding FlashlightCommand}" IconImageSource="flashlight.png" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
