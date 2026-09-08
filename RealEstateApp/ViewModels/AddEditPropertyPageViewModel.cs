@@ -82,15 +82,29 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         if (IsValid() == false)
         {
-           StatusMessage = "Please fill in all required fields";
+            StatusMessage = "Please fill in all required fields";
             StatusColor = Colors.Red;
+            await Vibrate();
         }
         else
         {
             service.SaveProperty(Property);
+            PerformHapticFeedback();
             await Shell.Current.GoToAsync("///propertylist");
         }
     }
+    public bool IsValid()
+    {
+        if (string.IsNullOrEmpty(Property.Address)
+            || Property.Beds == null
+            || Property.Price == null
+            || Property.AgentId == null)
+            return false;
+        return true;
+    }
+
+    private Command cancelSaveCommand;
+    public ICommand CancelSaveCommand => cancelSaveCommand ??= new Command(async () => { await CancelVibration(); await Shell.Current.GoToAsync(".."); });
 
     #endregion
 
@@ -205,6 +219,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         {
             IsGeocodeAddressButtonVisible = false;
 
+            PerformHapticFeedback();
             await Shell.Current.DisplayAlertAsync(
                 "No internet connection",
                 "You are not connected to the internet.",
@@ -224,18 +239,79 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     #endregion
 
-    public bool IsValid()
+    #region Vibration
+
+    private async Task Vibrate()
     {
-        if (string.IsNullOrEmpty(Property.Address)
-            || Property.Beds == null
-            || Property.Price == null
-            || Property.AgentId == null)
-            return false;
-        return true;
+        try
+        {
+            Vibration.Default.Vibrate(TimeSpan.FromSeconds(5));
+        }
+        catch (FeatureNotSupportedException)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Vibration not supported",
+                "Vibration is not supported on this device.",
+                "OK");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Vibration error",
+                $"An error occurred while trying to vibrate the device.\n\n{ex.Message}",
+                "OK");
+        }
     }
 
-    private Command cancelSaveCommand;
-    public ICommand CancelSaveCommand => cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
+    private async Task CancelVibration()
+    {
+        try
+        {
+            Vibration.Default.Cancel();
+        }
+        catch (FeatureNotSupportedException)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Vibration not supported",
+                "Vibration is not supported on this device.",
+                "OK");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Vibration error",
+                $"An error occurred while trying to cancel vibration.\n\n{ex.Message}",
+                "OK");
+        }
+    }
+
+    private void PerformHapticFeedback()
+    {
+        try
+        {
+            if (HapticFeedback.Default.IsSupported)
+            {
+                HapticFeedback.Default.Perform(HapticFeedbackType.LongPress);
+            }
+            else
+            {
+                Shell.Current.DisplayAlert(
+                    "Haptic feedback not supported",
+                    "Haptic feedback is not supported on this device.",
+                    "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            Shell.Current.DisplayAlert(
+                "Haptic feedback error",
+                $"An error occurred while trying to perform haptic feedback.\n\n{ex.Message}",
+                "OK");
+        }
+    }
+
+
+    #endregion
 
     #region HelperMethods
 
