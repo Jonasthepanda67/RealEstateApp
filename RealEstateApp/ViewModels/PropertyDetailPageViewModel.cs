@@ -14,6 +14,8 @@ public class PropertyDetailPageViewModel : BaseViewModel
     {
         this.service = service;
     }
+    
+    #region Properties
 
     Property property;
     public Property Property { get => property; set { SetProperty(ref property, value); } }
@@ -54,6 +56,10 @@ public class PropertyDetailPageViewModel : BaseViewModel
         }
     }
 
+    #endregion
+
+    #region Edit
+
     private Command editPropertyCommand;
     public ICommand EditPropertyCommand => editPropertyCommand ??= new Command(async () => await GotoEditProperty());
     async Task GotoEditProperty()
@@ -63,4 +69,54 @@ public class PropertyDetailPageViewModel : BaseViewModel
             {"MyProperty", Property }
         });
     }
+    #endregion
+
+    #region TextToSpeech
+
+    private Command tTSStartCommand;
+    public ICommand TTSStartCommand => tTSStartCommand ??= new Command(async () => await TTSStartExecute());
+    private CancellationTokenSource cts;
+    SpeechOptions options = new SpeechOptions()
+    {
+        Pitch = 1.2f,   // 0.0 - 2.0
+        Volume = 0.75f, // 0.0 - 1.0
+        Rate = 1.0f,    // 0.1 - 2.0
+    };
+    private async Task TTSStartExecute()
+    {
+        cts = new CancellationTokenSource();
+
+        TTSIsPlaying = true;
+        TTSIsNotPlaying = false;
+
+        await TextToSpeech.Default.SpeakAsync(Property.Description, options, cts.Token);
+
+        TTSIsPlaying = false;
+        TTSIsNotPlaying = true;
+    }
+
+    private Command tTSStopCommand;
+    public ICommand TTSStopCommand => tTSStopCommand ??= new Command(async () => await TTSStopExecute());
+    private async Task TTSStopExecute()
+    {
+        await cts.CancelAsync();
+        TTSIsPlaying = false;
+        TTSIsNotPlaying = true;
+    }
+
+    private bool tTSIsPlaying;
+    public bool TTSIsPlaying
+    {
+        get => tTSIsPlaying;
+        set => SetProperty(ref tTSIsPlaying, value);
+    }
+
+    private bool tTSIsNotPlaying = true;
+    public bool TTSIsNotPlaying
+    {
+        get => tTSIsNotPlaying;
+        set => SetProperty(ref tTSIsNotPlaying, value);
+    }
+
+    #endregion
 }

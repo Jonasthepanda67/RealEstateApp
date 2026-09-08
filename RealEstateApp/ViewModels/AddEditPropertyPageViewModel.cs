@@ -10,7 +10,7 @@ namespace RealEstateApp.ViewModels;
 public class AddEditPropertyPageViewModel : BaseViewModel
 {
     public bool IsGeocodeAddressButtonVisible { get; set; }
-    readonly IPropertyService service;
+    private readonly IPropertyService service;
 
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
