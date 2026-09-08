@@ -58,7 +58,7 @@ public class PropertyDetailPageViewModel : BaseViewModel
 
     #endregion
 
-    #region Edit
+    #region Navigation
 
     private Command editPropertyCommand;
     public ICommand EditPropertyCommand => editPropertyCommand ??= new Command(async () => await GotoEditProperty());

@@ -1,5 +1,6 @@
 ﻿using RealEstateApp.Models;
 using RealEstateApp.Services;
+using RealEstateApp.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -386,6 +387,20 @@ public class AddEditPropertyPageViewModel : BaseViewModel
                 $"An error occurred while trying to turn on the flashlight.\n\n{ex.Message}",
                 "OK");
         }
+    }
+
+    #endregion
+
+    #region Navigation
+
+    private Command goToCompassCommand;
+    public ICommand GoToCompassCommand => goToCompassCommand ??= new Command(async () => await GotoCompass());
+    async Task GotoCompass()
+    {
+        await Shell.Current.GoToAsync(nameof(CompassPage), true, new Dictionary<string, object>
+        {
+            { "MyProperty", Property }
+        });
     }
 
     #endregion

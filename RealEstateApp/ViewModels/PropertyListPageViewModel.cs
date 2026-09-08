@@ -101,7 +101,7 @@ public class PropertyListPageViewModel : BaseViewModel
 
             if (_currentLocation == null)
             {
-                await Shell.Current.DisplayAlert(
+                await Shell.Current.DisplayAlertAsync(
                     "Location unavailable",
                     "Unable to determine your current location.",
                     "OK");
@@ -111,7 +111,7 @@ public class PropertyListPageViewModel : BaseViewModel
         {
             Debug.WriteLine($"Unable to get location: {ex.Message}");
 
-            await Shell.Current.DisplayAlert(
+            await Shell.Current.DisplayAlertAsync(
                 "Location Error",
                 "Unable to determine your current location.",
                 "OK");
