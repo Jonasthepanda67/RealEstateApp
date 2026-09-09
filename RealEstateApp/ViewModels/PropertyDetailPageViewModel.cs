@@ -71,6 +71,80 @@ public class PropertyDetailPageViewModel : BaseViewModel
     }
     #endregion
 
+    #region Phone
+
+    private Command openPhoneOptionsCommand;
+    public ICommand OpenPhoneOptionsCommand => openPhoneOptionsCommand ??= new Command(async () => await OpenPhoneOptionsExecute());
+
+    public async Task OpenPhoneOptionsExecute()
+    {
+        if (Agent == null || string.IsNullOrWhiteSpace(Agent.Phone))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Agent phone number is not available.", "OK");
+            return;
+        }
+        string action = await Shell.Current.DisplayActionSheetAsync("Contact Agent", "Cancel", null, "Call", "SMS");
+        switch (action)
+        {
+            case "Call":
+                try
+                {
+                    PhoneDialer.Open(Agent.Phone);
+                }
+                catch (Exception ex)
+                {
+                    await Shell.Current.DisplayAlertAsync("Error", $"Unable to make a call: {ex.Message}", "OK");
+                }
+                break;
+            case "SMS":
+                try
+                {
+                    await Sms.ComposeAsync(new SmsMessage($"Hej, {Property.Vendor.FirstName},\nangående {Property.Address} ", Agent.Phone));
+                }
+                catch (Exception ex)
+                {
+                    await Shell.Current.DisplayAlertAsync("Error", $"Unable to compose Sms message: {ex.Message}", "OK");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    #endregion
+
+    #region Email
+
+    private Command openEmailClientCommand;
+    public ICommand OpenEmailClientCommand => openEmailClientCommand ??= new Command(async () => await OpenEmailClientExecute());
+
+    private async Task OpenEmailClientExecute()
+    {
+        if (Agent == null || string.IsNullOrWhiteSpace(Agent.Email))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Agent email is not available.", "OK");
+            return;
+        }
+
+        var attachmentFilePath = Path.Combine(FileSystem.CacheDirectory, "property.txt");
+        await File.WriteAllTextAsync(attachmentFilePath, $"{Property.Address}");
+
+        EmailMessage message = new EmailMessage($"{Property.Name}", $"Hej, {Property.Vendor.FirstName},\nangående {Property.Address} ", Agent.Email);
+        message.Attachments.Add(new EmailAttachment(attachmentFilePath));
+
+        try
+        {
+            await Email.ComposeAsync(message);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to compose Email: {ex.Message}","OK");
+        }
+    }
+
+    #endregion
+
     #region TextToSpeech
 
     private Command tTSStartCommand;
@@ -116,6 +190,42 @@ public class PropertyDetailPageViewModel : BaseViewModel
     {
         get => tTSIsNotPlaying;
         set => SetProperty(ref tTSIsNotPlaying, value);
+    }
+
+    #endregion
+
+    #region Maps
+
+    private Command openMapMarkedCommand;
+    public ICommand OpenMapMarkedCommand => openMapMarkedCommand ??= new Command(async () => await OpenMapMarkedExecute());
+
+    private async Task OpenMapMarkedExecute()
+    {
+        if (Property == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property is not available.", "OK");
+            return;
+        }
+
+        var location = new Location(Property.Latitude.Value, Property.Longitude.Value);
+        var options = new MapLaunchOptions { Name = Property.Address };
+        await Map.Default.OpenAsync(location, options);
+    }
+
+    private Command openMapDirectionsCommand;
+    public ICommand OpenMapDirectionsCommand => openMapDirectionsCommand ??= new Command(async () => await OpenMapDirectionsExecute());
+
+    private async Task OpenMapDirectionsExecute()
+    {
+        if (Property == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property is not available.", "OK");
+            return;
+        }
+
+        var location = new Location(Property.Latitude.Value, Property.Longitude.Value);
+        var options = new MapLaunchOptions { Name = Property.Address, NavigationMode = NavigationMode.Driving };
+        await location.OpenMapsAsync(options);
     }
 
     #endregion
