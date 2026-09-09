@@ -193,4 +193,40 @@ public class PropertyDetailPageViewModel : BaseViewModel
     }
 
     #endregion
+
+    #region Maps
+
+    private Command openMapMarkedCommand;
+    public ICommand OpenMapMarkedCommand => openMapMarkedCommand ??= new Command(async () => await OpenMapMarkedExecute());
+
+    private async Task OpenMapMarkedExecute()
+    {
+        if (Property == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property is not available.", "OK");
+            return;
+        }
+
+        var location = new Location(Property.Latitude.Value, Property.Longitude.Value);
+        var options = new MapLaunchOptions { Name = Property.Address };
+        await Map.Default.OpenAsync(location, options);
+    }
+
+    private Command openMapDirectionsCommand;
+    public ICommand OpenMapDirectionsCommand => openMapDirectionsCommand ??= new Command(async () => await OpenMapDirectionsExecute());
+
+    private async Task OpenMapDirectionsExecute()
+    {
+        if (Property == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property is not available.", "OK");
+            return;
+        }
+
+        var location = new Location(Property.Latitude.Value, Property.Longitude.Value);
+        var options = new MapLaunchOptions { Name = Property.Address, NavigationMode = NavigationMode.Driving };
+        await location.OpenMapsAsync(options);
+    }
+
+    #endregion
 }
