@@ -290,6 +290,44 @@
 
                 </VerticalStackLayout>
 
+                <Label
+                    Margin="0,20,0,0"
+                    FontAttributes="Bold"
+                    FontSize="17"
+                    Text="Vendor" />
+
+                <Border
+                    Padding="12"
+                    StrokeShape="RoundRectangle 12">
+
+                    <Grid ColumnDefinitions="*"
+                          Margin="5">
+
+                        <VerticalStackLayout
+                            Spacing="15">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="17"
+                                Text="{Binding Property.Vendor.FullName}" />
+
+
+                            <Label
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                Text="{Binding Property.Vendor.Email}" />
+
+
+                            <Label
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                Text="{Binding Property.Vendor.Phone}" />
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
 
                 <Label
                     Margin="0,20,0,0"
@@ -355,8 +393,7 @@
 
                     </Grid>
 
-                </Border>
-
+                </Border>              
 
                 <Label
                     Margin="0,15,0,0"
