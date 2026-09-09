@@ -1,8 +1,9 @@
 ﻿using RealEstateApp.Models;
 using RealEstateApp.Services;
 using RealEstateApp.Views;
-using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Text.Json;
+using System.Windows.Input;
 
 namespace RealEstateApp.ViewModels;
 
@@ -226,6 +227,142 @@ public class PropertyDetailPageViewModel : BaseViewModel
         var location = new Location(Property.Latitude.Value, Property.Longitude.Value);
         var options = new MapLaunchOptions { Name = Property.Address, NavigationMode = NavigationMode.Driving };
         await location.OpenMapsAsync(options);
+    }
+
+    #endregion
+
+    #region Browser
+
+    private Command openBrowserCommand;
+    public ICommand OpenBrowserCommand => openBrowserCommand ??= new Command(async () => await OpenBrowserExecute());
+
+    public async Task OpenBrowserExecute()
+    {
+        if (Property == null || string.IsNullOrWhiteSpace(Property.NeighborhoodUrl))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property neighbourhood URL is not available.", "OK");
+            return;
+        }
+
+        var options = new BrowserLaunchOptions
+        {
+            LaunchMode = BrowserLaunchMode.SystemPreferred,
+            TitleMode = BrowserTitleMode.Show,
+            PreferredToolbarColor = Color.Parse("Green"),
+            PreferredControlColor = Color.Parse("LightBlue")
+        };
+
+        try
+        {
+            await Browser.Default.OpenAsync(Property.NeighborhoodUrl, options);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to open browser: {ex.Message}", "OK");
+        }
+    }
+
+    #endregion
+
+    #region Contract
+
+    private Command openContractCommand;
+    public ICommand OpenContractCommand => openContractCommand ??= new Command(async () => await OpenContractExecute());
+
+    public async Task OpenContractExecute()
+    {
+        if (Property == null || string.IsNullOrWhiteSpace(Property.ContractFilePath))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property contract file path is not available.", "OK");
+            return;
+        }
+
+        try
+        {
+            await Launcher.Default.OpenAsync(new OpenFileRequest("Contract", new ReadOnlyFile(Property.ContractFilePath)));
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to open contract file: {ex.Message}", "OK");
+        }
+    }
+
+    #endregion
+
+    #region Share
+
+    private Command shareTextCommand;
+    public ICommand ShareTextCommand => shareTextCommand ??= new Command(async () => await ShareTextExecute());
+
+    private Command shareContractCommand;
+    public ICommand ShareContractCommand => shareContractCommand ??= new Command(async () => await ShareContractExecute());
+
+    private Command copyToClipboardCommand;
+    public ICommand CopyToClipboardCommand => copyToClipboardCommand ??= new Command(async () => await CopyToClipboardExecute());
+
+    private async Task ShareTextExecute()
+    {
+        if (Property == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property is not available.", "OK");
+            return;
+        }
+
+        try
+        {
+            await Share.Default.RequestAsync(new ShareTextRequest
+            {
+                Uri = Property.NeighborhoodUrl,
+                Subject = "A property you may be interested in",
+                Text = $"Address: {Property.Address} Price: {Property.Price} Bedrooms: {Property.Beds}",
+                Title = "Share Property"
+            });
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to share text: {ex.Message}", "OK");
+        }
+    }
+
+    private async Task ShareContractExecute()
+    {
+        if (Property == null || string.IsNullOrWhiteSpace(Property.ContractFilePath))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property contract file path is not available.", "OK");
+            return;
+        }
+
+        try
+        {
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = "Share Property Contract",
+                File = new ShareFile(Property.ContractFilePath)
+            });
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to share contract file: {ex.Message}", "OK");
+        }
+    }
+
+    private async Task CopyToClipboardExecute()
+    {
+        if (Property == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property is not available.", "OK");
+            return;
+        }
+
+        try
+        {
+            await Clipboard.Default.SetTextAsync(JsonSerializer.Serialize(Property));
+            await Shell.Current.DisplayAlertAsync("Success", "Property copied to clipboard as JSON.", "OK");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to copy to clipboard: {ex.Message}", "OK");
+        }
     }
 
     #endregion
