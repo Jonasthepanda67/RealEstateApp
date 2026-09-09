@@ -54,7 +54,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.MANSION, Tier = PropertyTier.LEGENDARY,
                     Beds = 1, Baths = 1, Parking = 20, LandSize = 16000, Price = 12800000, AgentId = "agent_prix_luxury_real_estate",
                     VendorId = "vendor_prix_luxury_real_estate_1", ImageUrls = GetPropertyImageUrls("richman_villa"),
-                    Latitude = 34.092075, Longitude = -118.401588
+                    Latitude = 34.092075, Longitude = -118.401588, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Beverly_Hills,_California"
                 },
                 new Property
                 {
@@ -64,7 +64,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.OFFICE, Tier = PropertyTier.PREMIUM,
                     Beds = 1, Baths = 1, Parking = 60, LandSize = 25000, Price = 1000000, AgentId = "agent_dynasty_8_executive",
                     VendorId = "vendor_dynasty_8_executive_1", ImageUrls = GetPropertyImageUrls("maze_bank_west_office"),
-                    Latitude =  34.019893, Longitude = -118.498653
+                    Latitude =  34.019893, Longitude = -118.498653, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Santa_Monica,_California"
                 },
                 new Property
                 {
@@ -74,7 +74,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.OFFICE, Tier = PropertyTier.LEGENDARY,
                     Beds = 1, Baths = 1, Parking = 60, LandSize = 60000, Price = 4000000, AgentId = "agent_dynasty_8_executive",
                     VendorId = "vendor_dynasty_8_executive_1", ImageUrls = GetPropertyImageUrls("maze_bank_tower_office"),
-                    Latitude = 34.051051, Longitude = -118.254413
+                    Latitude = 34.051051, Longitude = -118.254413, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Downtown_Los_Angeles"
                 },
                 new Property
                 {
@@ -84,7 +84,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.OFFICE, Tier = PropertyTier.PREMIUM,
                     Beds = 1, Baths = 1, Parking = 60, LandSize = 35000, Price = 3100000, AgentId = "agent_dynasty_8_executive",
                     VendorId = "vendor_dynasty_8_executive_1", ImageUrls = GetPropertyImageUrls("lombank_west_office"),
-                    Latitude = 34.016716, Longitude = -118.500626,
+                    Latitude = 34.016716, Longitude = -118.500626, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Santa_Monica,_California"
                 },
                 new Property
                 {
@@ -94,7 +94,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.OFFICE, Tier = PropertyTier.PREMIUM,
                     Beds = 1, Baths = 1, Parking = 60, LandSize = 45000, Price = 2250000, AgentId = "agent_dynasty_8_executive",
                     VendorId = "vendor_dynasty_8_executive_1", ImageUrls = GetPropertyImageUrls("arcadius_business_center_office"),
-                    Latitude = 34.032887, Longitude = -118.45133,
+                    Latitude = 34.032887, Longitude = -118.45133, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sawtelle,_Los_Angeles"
                 },
                 new Property
                 {
@@ -104,7 +104,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.LEGENDARY,
                     Beds = 2, Baths = 2, Parking = 2, LandSize = 6000, Price = 985000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("eclipse_towers_penthouse_suite_1"),
-                    Latitude = 34.090898, Longitude = -118.394092,
+                    Latitude = 34.090898, Longitude = -118.394092, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -114,7 +114,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.LEGENDARY,
                     Beds = 3, Baths = 4, Parking = 3, LandSize = 7500, Price = 905000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("eclipse_towers_penthouse_suite_2"),
-                    Latitude = 34.090898, Longitude = -118.394092,
+                    Latitude = 34.090898, Longitude = -118.394092, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -124,7 +124,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.LEGENDARY,
                     Beds = 3, Baths = 6, Parking = 4, LandSize = 12900, Price = 1100000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("eclipse_towers_penthouse_suite_3"),
-                    Latitude = 34.090898, Longitude = -118.394092,
+                    Latitude = 34.090898, Longitude = -118.394092, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -134,7 +134,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 2, LandSize = 3600, Price = 492000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("tinsel_towers_apt_42"),
-                    Latitude = 34.090898, Longitude = -118.394092,
+                    Latitude = 34.090898, Longitude = -118.394092, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -144,7 +144,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 3, Parking = 3, LandSize = 4200, Price = 484000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("richards_majestic_apt_2"),
-                    Latitude = 34.057045, Longitude = -118.417508,
+                    Latitude = 34.057045, Longitude = -118.417508, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -154,7 +154,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 2, LandSize = 3100, Price = 500000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("eclipse_towers_apt_3"),
-                    Latitude = 34.090898, Longitude = -118.394092,
+                    Latitude = 34.090898, Longitude = -118.394092, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -164,7 +164,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 3, Parking = 2, LandSize = 3400, Price = 468000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("del_perro_heights_apt_4"),
-                    Latitude = 34.064163, Longitude = -118.432364,
+                    Latitude = 34.064163, Longitude = -118.432364, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Santa_Monica,_California"
                 },
                 new Property
                 {
@@ -174,7 +174,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 3, Parking = 3, LandSize = 38000, Price = 476000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("integrity_way_4_apt_28"),
-                    Latitude = 34.051474, Longitude = -118.261657,
+                    Latitude = 34.051474, Longitude = -118.261657, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Downtown_Los_Angeles"
                 },
                 new Property
                 {
@@ -184,7 +184,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 4, Parking = 3, LandSize = 5200, Price = 335000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("weazel_plaza_apt_101"),
-                    Latitude = 34.0550656, Longitude = -118.4134437,
+                    Latitude = 34.0550656, Longitude = -118.4134437, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -194,7 +194,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 2, Parking = 3, LandSize = 4100, Price = 319000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("weazel_plaza_apt_70"),
-                    Latitude = 34.0550656, Longitude = -118.4134437,
+                    Latitude = 34.0550656, Longitude = -118.4134437, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -204,7 +204,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 2, Parking = 3, LandSize = 3500, Price = 304000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("weazel_plaza_apt_26"),
-                    Latitude = 34.0550656, Longitude = -118.4134437,
+                    Latitude = 34.0550656, Longitude = -118.4134437, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -214,7 +214,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 2, LandSize = 3800, Price = 270000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("tinsel_towers_apt_45"),
-                    Latitude = 34.0908979, Longitude = -118.39409218,
+                    Latitude = 34.0908979, Longitude = -118.39409218, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -224,7 +224,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 2, LandSize = 3400, Price = 286000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("tinsel_towers_apt_29"),
-                    Latitude = 34.0908979, Longitude = -118.39409218,
+                    Latitude = 34.0908979, Longitude = -118.39409218, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -234,7 +234,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.PENTHOUSE, Tier = PropertyTier.LEGENDARY,
                     Beds = 1, Baths = 3, Parking = 10, LandSize = 14500, Price = 6533500, AgentId = "agent_diamond_casino_resort",
                     VendorId = "vendor_diamond_casino_resort_1", ImageUrls = GetPropertyImageUrls("the_diamond_casino_penthouse"),
-                    Latitude = 33.932804, Longitude = -118.16423,
+                    Latitude = 33.932804, Longitude = -118.16423, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Downey,_California"
                 },
                 new Property
                 {
@@ -244,7 +244,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 3, Parking = 10, LandSize = 4500, Price = 253000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("richards_majestic_apt_51"),
-                    Latitude = 34.0570451, Longitude = -118.417508,
+                    Latitude = 34.0570451, Longitude = -118.417508, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -254,7 +254,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 3, Parking = 10, LandSize = 4100, Price = 241000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("richards_majestic_apt_4"),
-                    Latitude = 34.0570451, Longitude = -118.417508,
+                    Latitude = 34.0570451, Longitude = -118.417508, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -264,7 +264,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3800, Price = 391000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("eclipse_towers_apt_40"),
-                    Latitude = 34.0908979, Longitude = -118.3940921,
+                    Latitude = 34.0908979, Longitude = -118.3940921, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -274,7 +274,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 3, Parking = 10, LandSize = 4100, Price = 400000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("eclipse_towers_apt_31"),
-                    Latitude = 34.0908979, Longitude = -118.3940921,
+                    Latitude = 34.0908979, Longitude = -118.3940921, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -284,7 +284,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3100, Price = 373000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("eclipse_towers_apt_9"),
-                    Latitude = 34.0908979, Longitude = -118.3940921,
+                    Latitude = 34.0908979, Longitude = -118.3940921, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -294,7 +294,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3100, Price = 382000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("eclipse_towers_apt_5"),
-                    Latitude = 34.0908979, Longitude = -118.3940921,
+                    Latitude = 34.0908979, Longitude = -118.3940921, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Sunset_Strip"
                 },
                 new Property
                 {
@@ -304,7 +304,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 1, Parking = 60, LandSize = 2400, Price = 134000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("dream_tower_apt_15"),
-                    Latitude = 34.0631864, Longitude = -118.300259,
+                    Latitude = 34.0631864, Longitude = -118.300259, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Koreatown,_Los_Angeles"
                 },
                 new Property
                 {
@@ -314,7 +314,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3400, Price = 200000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("del_perro_heights_apt_7"),
-                    Latitude = 34.0192694, Longitude = -118.4981403,
+                    Latitude = 34.0192694, Longitude = -118.4981403, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Santa_Monica,_California"
                 },
                 new Property
                 {
@@ -324,7 +324,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 2, Baths = 3, Parking = 10, LandSize = 3600, Price = 205000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("del_perro_heights_apt_20"),
-                    Latitude = 34.0192694, Longitude = -118.4981403,
+                    Latitude = 34.0192694, Longitude = -118.4981403, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Santa_Monica,_California"
                 },
                 new Property
                 {
@@ -334,7 +334,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 1, Parking = 2, LandSize = 1800, Price = 99000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("san_vitas_street_1561_apt_2"),
-                    Latitude = 34.1053367, Longitude = -118.3196482,
+                    Latitude = 34.1053367, Longitude = -118.3196482, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Franklin_Avenue_(Los_Angeles)"
                 },
                 new Property
                 {
@@ -344,7 +344,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3800, Price = 247000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("integrity_way_4_apt_35"),
-                    Latitude = 34.051474, Longitude = -118.261657,
+                    Latitude = 34.051474, Longitude = -118.261657, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Westlake,_Los_Angeles"
                 },
                 new Property
                 {
@@ -354,7 +354,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3500, Price = 235000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_2", ImageUrls = GetPropertyImageUrls("integrity_way_4_apt_30"),
-                    Latitude = 34.051474, Longitude = -118.261657,
+                    Latitude = 34.051474, Longitude = -118.261657, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Westlake,_Los_Angeles"
                 },
                 new Property
                 {
@@ -364,7 +364,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.PREMIUM,
                     Beds = 3, Baths = 3, Parking = 10, LandSize = 4200, Price = 223000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_3", ImageUrls = GetPropertyImageUrls("alta_street_3_tower_apt_57"),
-                    Latitude = 34.0500274, Longitude = -118.2533141,
+                    Latitude = 34.0500274, Longitude = -118.2533141, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Los_Angeles"
                 },
                 new Property
                 {
@@ -374,7 +374,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.APARTMENT, Tier = PropertyTier.COMMON,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3400, Price = 217000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("alta_street_3_tower_apt_10"),
-                    Latitude = 34.0500274, Longitude = -118.2533141,
+                    Latitude = 34.0500274, Longitude = -118.2533141, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Los_Angeles"
                 },
                 new Property
                 {
@@ -384,7 +384,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.BUNKER, Tier = PropertyTier.TACTICAL,
                     Beds = 1, Baths = 2, Parking = 2, LandSize = 45000, Price = 1650000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_1", ImageUrls = GetPropertyImageUrls("the_chumash_bunker"),
-                    Latitude = 34.2583, Longitude = -118.5914,
+                    Latitude = 34.2583, Longitude = -118.5914, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Chatsworth,_Los_Angeles"
                 },
                 new Property
                 {
@@ -394,7 +394,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.BUNKER,
                     Beds = 1, Baths = 2, Parking = 3, LandSize = 45000, Price = 2120000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_2", ImageUrls = GetPropertyImageUrls("grand_senora_desert_bunker"),
-                    Latitude = 34.1201243, Longitude = -117.4649267,
+                    Latitude = 34.1201243, Longitude = -117.4649267, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Fontana,_California"
                 },
                 new Property
                 {
@@ -404,7 +404,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.HOUSE, Tier = PropertyTier.TACTICAL,
                     Beds = 2, Baths = 2, Parking = 10, LandSize = 3800, Price = 800000, AgentId = "agent_dynasty_8",
                     VendorId = "vendor_dynasty_8_1", ImageUrls = GetPropertyImageUrls("wild_oats_drive_3655"),
-                    Latitude = 34.0526055, Longitude = -118.4096627,
+                    Latitude = 34.0526055, Longitude = -118.4096627, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Century_City"
                 },
                 new Property
                 {
@@ -414,7 +414,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.CLUBHOUSE, Tier = PropertyTier.COMMERCIAL,
                     Beds = 1, Baths = 2, Parking = 17, LandSize = 8500, Price = 472000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_1", ImageUrls = GetPropertyImageUrls("downtown_vinewood_clubhouse"),
-                    Latitude = 34.038143, Longitude = -118.234319,
+                    Latitude = 34.038143, Longitude = -118.234319, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Los_Angeles"
                 },
                 new Property
                 {
@@ -424,7 +424,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.NIGHTCLUB, Tier = PropertyTier.PREMIUM,
                     Beds = 1, Baths = 1, Parking = 39, LandSize = 32000, Price = 455000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_2", ImageUrls = GetPropertyImageUrls("del_perro_nightclub"),
-                    Latitude = 34.0155258, Longitude = -118.4967136,
+                    Latitude = 34.0155258, Longitude = -118.4967136, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Santa_Monica,_California"
                 },
                 new Property
                 {
@@ -434,7 +434,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.NIGHTCLUB, Tier = PropertyTier.PREMIUM,
                     Beds = 1, Baths = 1, Parking = 39, LandSize = 32000, Price = 1670000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_1", ImageUrls = GetPropertyImageUrls("downtown_vinewood_nightclub"),
-                    Latitude = 34.1027177, Longitude = -118.326997,
+                    Latitude = 34.1027177, Longitude = -118.326997, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Los_Angeles"
                 },
                 new Property
                 {
@@ -444,7 +444,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.ARCADE, Tier = PropertyTier.COMMERCIAL,
                     Beds = 0, Baths = 2, Parking = 10, LandSize = 12500, Price = 1875000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_2", ImageUrls = GetPropertyImageUrls("videogeddon_arcade"),
-                    Latitude = 34.029675, Longitude = -118.2314437,
+                    Latitude = 34.029675, Longitude = -118.2314437, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Los_Angeles"
                 },
                 new Property
                 {
@@ -454,7 +454,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.AUTOSHOP, Tier = PropertyTier.COMMERCIAL,
                     Beds = 1, Baths = 1, Parking = 12, LandSize = 9500, Price = 1670000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_1", ImageUrls = GetPropertyImageUrls("mission_row_auto_shop"),
-                    Latitude = 34.042602, Longitude = -118.245959,
+                    Latitude = 34.042602, Longitude = -118.245959, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Los_Angeles"
                 },
                 new Property
                 {
@@ -464,7 +464,7 @@ namespace RealEstateApp.Repositories
                     Type = PropertyType.AUTOSHOP, Tier = PropertyTier.COMMERCIAL,
                     Beds = 1, Baths = 1, Parking = 12, LandSize = 9500, Price = 1830000, AgentId = "agent_maze_bank_foreclosures",
                     VendorId = "vendor_maze_bank_foreclosures_2", ImageUrls = GetPropertyImageUrls("burton_auto_shop"),
-                    Latitude = 34.0889942, Longitude = -118.3766725,
+                    Latitude = 34.0889942, Longitude = -118.3766725, NeighbourhoodUrl = "https://en.wikipedia.org/wiki/West_Hollywood,_California"
                 }
             };
         }

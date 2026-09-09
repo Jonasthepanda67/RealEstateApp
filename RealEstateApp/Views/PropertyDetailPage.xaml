@@ -236,6 +236,22 @@
 
                 </Grid>
 
+                <VerticalStackLayout
+                    Margin="0,15,0,0"
+                    Spacing="5">
+                    
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Other Features" />
+                    
+                    <Button
+                        Command="{Binding OpenBrowserCommand}"
+                        FontSize="14"
+                        ImageSource="link_2.png" />
+
+                </VerticalStackLayout>
+
                 <HorizontalStackLayout>
                     
                     <Label

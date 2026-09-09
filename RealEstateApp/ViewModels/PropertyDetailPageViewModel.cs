@@ -229,4 +229,37 @@ public class PropertyDetailPageViewModel : BaseViewModel
     }
 
     #endregion
+
+    #region Browser
+
+    private Command openBrowserCommand;
+    public ICommand OpenBrowserCommand => openBrowserCommand ??= new Command(async () => await OpenBrowserExecute());
+
+    public async Task OpenBrowserExecute()
+    {
+        if (Property == null || string.IsNullOrWhiteSpace(Property.NeighbourhoodUrl))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property neighbourhood URL is not available.", "OK");
+            return;
+        }
+
+        var options = new BrowserLaunchOptions
+        {
+            LaunchMode = BrowserLaunchMode.SystemPreferred,
+            TitleMode = BrowserTitleMode.Show,
+            PreferredToolbarColor = Color.Parse("Green"),
+            PreferredControlColor = Color.Parse("LightBlue")
+        };
+
+        try
+        {
+            await Browser.Default.OpenAsync(Property.NeighbourhoodUrl, options);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to open browser: {ex.Message}", "OK");
+        }
+    }
+
+    #endregion
 }
