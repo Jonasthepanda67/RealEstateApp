@@ -236,23 +236,48 @@
 
                 </Grid>
 
-                <VerticalStackLayout
-                    Margin="0,15,0,0"
-                    Spacing="5">
-                    
-                    <Label
+                <Label
                         FontAttributes="Bold"
                         FontSize="17"
-                        Text="Other Features" />
-                    
-                    <Button
-                        Command="{Binding OpenBrowserCommand}"
-                        FontSize="14"
-                        ImageSource="link_2.png" />
+                        Text="Other Features"/>
+                <Border>
+                    <Grid Margin="10,5,10,15"
+      ColumnSpacing="10"
+      RowSpacing="10"
+      ColumnDefinitions="Auto,Auto,Auto,Auto"
+      RowDefinitions="Auto,Auto">
 
-                </VerticalStackLayout>
+                        <Label
+        FontAttributes="Bold"
+        FontSize="14"
+        Text="Neighborhood"
+        Grid.Column="0"
+        Grid.Row="0" />
 
-                <HorizontalStackLayout>
+                        <Label
+        FontAttributes="Bold"
+        FontSize="14"
+        Text="Contract"
+        Grid.Column="1"
+        Grid.Row="0" />
+
+                        <Button
+            Command="{Binding OpenBrowserCommand}"
+            ImageSource="link_2.png"
+            Grid.Column="0"
+            Grid.Row="1" />
+
+                        <Button
+            Command="{Binding OpenContractCommand}"
+            ImageSource="file_open.png"
+            Grid.Column="1"
+            Grid.Row="1" />
+
+
+                    </Grid>
+                </Border>   
+
+                    <HorizontalStackLayout>
                     
                     <Label
                     Margin="0,15,0,0"

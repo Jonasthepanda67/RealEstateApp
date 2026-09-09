@@ -237,7 +237,7 @@ public class PropertyDetailPageViewModel : BaseViewModel
 
     public async Task OpenBrowserExecute()
     {
-        if (Property == null || string.IsNullOrWhiteSpace(Property.NeighbourhoodUrl))
+        if (Property == null || string.IsNullOrWhiteSpace(Property.NeighborhoodUrl))
         {
             await Shell.Current.DisplayAlertAsync("Error", "Property neighbourhood URL is not available.", "OK");
             return;
@@ -253,11 +253,36 @@ public class PropertyDetailPageViewModel : BaseViewModel
 
         try
         {
-            await Browser.Default.OpenAsync(Property.NeighbourhoodUrl, options);
+            await Browser.Default.OpenAsync(Property.NeighborhoodUrl, options);
         }
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlertAsync("Error", $"Unable to open browser: {ex.Message}", "OK");
+        }
+    }
+
+    #endregion
+
+    #region Contract
+
+    private Command openContractCommand;
+    public ICommand OpenContractCommand => openContractCommand ??= new Command(async () => await OpenContractExecute());
+
+    public async Task OpenContractExecute()
+    {
+        if (Property == null || string.IsNullOrWhiteSpace(Property.ContractFilePath))
+        {
+            await Shell.Current.DisplayAlertAsync("Error", "Property contract file path is not available.", "OK");
+            return;
+        }
+
+        try
+        {
+            await Launcher.Default.OpenAsync(new OpenFileRequest("Contract", new ReadOnlyFile(Property.ContractFilePath)));
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Unable to open contract file: {ex.Message}", "OK");
         }
     }
 
