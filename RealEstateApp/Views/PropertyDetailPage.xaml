@@ -236,6 +236,82 @@
 
                 </Grid>
 
+                <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Other Features"/>
+
+                <Border>
+                    <HorizontalStackLayout Spacing="15">
+                        <VerticalStackLayout Margin="10,5,10,5" Spacing="15">
+
+                            <Label
+                FontSize="13"
+                Text="Neighborhood"/>
+
+                            <Button
+            Command="{Binding OpenBrowserCommand}"
+            ImageSource="link_2.png"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Margin="10,5,10,5" Spacing="15">
+
+                            <Label
+                FontSize="13"
+                Text="Contract"  />
+
+                            <Button
+            Command="{Binding OpenContractCommand}"
+            ImageSource="file_open.png"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Border>
+                <Grid Margin="10,5,10,15"
+                          ColumnSpacing="10"
+                          RowSpacing="10"
+                          ColumnDefinitions="*,*,*"
+                          RowDefinitions="*,*">
+
+
+                    <Label
+                            FontSize="13"
+                            Text="Share Text"
+                            Grid.Column="0"
+                            Grid.Row="0" />
+
+                    <Label
+                            FontSize="13"
+                            Text="Share Contract"
+                            Grid.Column="1"
+                            Grid.Row="0" />
+
+                    <Label
+                            FontSize="13"
+                            Text="Clipboard"
+                            Grid.Column="2"
+                            Grid.Row="0" />
+
+                    <Button
+                            Command="{Binding ShareTextCommand}"
+                            ImageSource="share.png"
+                            Grid.Column="0"
+                            Grid.Row="1" />
+
+                    <Button
+                            Command="{Binding ShareContractCommand}"
+                            ImageSource="file_export.png"
+                            Grid.Column="1"
+                            Grid.Row="1" />
+
+                    <Button
+                            Command="{Binding CopyToClipboardCommand}"
+                            ImageSource="clipboard_paste.png"
+                            Grid.Column="2"
+                            Grid.Row="1" />
+                </Grid>
+                </Border>
+
                 <HorizontalStackLayout>
                     
                     <Label
