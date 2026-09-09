@@ -290,6 +290,44 @@
 
                 </VerticalStackLayout>
 
+                <Label
+                    Margin="0,20,0,0"
+                    FontAttributes="Bold"
+                    FontSize="17"
+                    Text="Vendor" />
+
+                <Border
+                    Padding="12"
+                    StrokeShape="RoundRectangle 12">
+
+                    <Grid ColumnDefinitions="*"
+                          Margin="5">
+
+                        <VerticalStackLayout
+                            Spacing="15">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="17"
+                                Text="{Binding Property.Vendor.FullName}" />
+
+
+                            <Label
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                Text="{Binding Property.Vendor.Email}" />
+
+
+                            <Label
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                Text="{Binding Property.Vendor.Phone}" />
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
 
                 <Label
                     Margin="0,20,0,0"
@@ -331,18 +369,31 @@
 
                             <Label
                                 FontSize="13"
-                                Text="{Binding Agent.Email}" />
+                                TextColor="Blue"
+                                Text="{Binding Agent.Email}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding OpenEmailClientCommand}"
+                                        CommandParameter="{Binding Agent.Email}" />
+                                </Label.GestureRecognizers>
+                            </Label>
 
                             <Label
                                 FontSize="13"
-                                Text="{Binding Agent.Phone}" />
+                                TextColor="Blue"
+                                Text="{Binding Agent.Phone}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding OpenPhoneOptionsCommand}"
+                                        CommandParameter="{Binding Agent.Phone}" />
+                                </Label.GestureRecognizers>
+                            </Label>
 
                         </VerticalStackLayout>
 
                     </Grid>
 
-                </Border>
-
+                </Border>              
 
                 <Label
                     Margin="0,15,0,0"
