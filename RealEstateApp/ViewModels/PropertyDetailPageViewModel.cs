@@ -2,6 +2,7 @@
 using RealEstateApp.Services;
 using RealEstateApp.Views;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Text.Json;
 using System.Windows.Input;
 
@@ -153,8 +154,8 @@ public class PropertyDetailPageViewModel : BaseViewModel
     private CancellationTokenSource cts;
     SpeechOptions options = new SpeechOptions()
     {
-        Pitch = 1.2f,   // 0.0 - 2.0
-        Volume = 0.75f, // 0.0 - 1.0
+        Pitch = Preferences.Get("pitch", 1),
+        Volume = Preferences.Get("volume", 1),
         Rate = 1.0f,    // 0.1 - 2.0
     };
     private async Task TTSStartExecute()

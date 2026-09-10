@@ -10,7 +10,7 @@ public class PropertyListPageViewModel : BaseViewModel
 {
     public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new();
     private Location _currentLocation;
-    private bool sortFurthestFirst = false;
+    private bool sortFurthestFirst = !Preferences.Get("sortByClosest", true);
 
     private readonly IPropertyService service;
 
@@ -130,6 +130,7 @@ public class PropertyListPageViewModel : BaseViewModel
             return;
 
         sortFurthestFirst = !sortFurthestFirst;
+        Preferences.Set("sortByClosest", !sortFurthestFirst);
 
         SortProperties();
     }
