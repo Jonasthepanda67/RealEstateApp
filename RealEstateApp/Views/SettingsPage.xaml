@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RealEstateApp.Views.SettingsPage"
+             xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
+             Title="SettingsPage"
+             x:DataType="vm:SettingsPageViewModel">
+    <VerticalStackLayout Padding="10">
+        <Border StrokeShape="RoundRectangle 10"
+                StrokeThickness="1"
+                Stroke="LightGray"
+                Padding="10"
+                Margin="10">
+            <VerticalStackLayout>
+                <Label Text="{Binding Volume, StringFormat='Volume: {0:F2}'}"
+               FontSize="Medium"
+               HorizontalOptions="Center" />
+
+                <Slider x:Name="VolumeSlider"
+                Minimum="0"
+                Maximum="2"
+                Value="{Binding Volume, Mode=TwoWay}"/>
+
+                <Label Text="{Binding Pitch, StringFormat='Pitch: {0:F2}'}"
+               FontSize="Medium"
+               HorizontalOptions="Center" />
+
+                <Slider x:Name="PitchSlider"
+                Minimum="0"
+                Maximum="2"
+                Value="{Binding Pitch, Mode=TwoWay}"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <VerticalStackLayout Padding="10">            
+            <Label Text="Sort Properties by Closest"
+                FontSize="Medium"
+                HorizontalOptions="Center" />
+            
+            <CheckBox IsChecked="{Binding SortByClosest, Mode=TwoWay}"
+                HorizontalOptions="Center" />            
+        </VerticalStackLayout>
+
+
+        <Label Text="Reset Settings"
+            FontSize="Medium"
+            HorizontalOptions="Center" />
+
+        <Button Text="Reset"
+            Command="{Binding ResetSettingsCommand}"
+            HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+</ContentPage>
