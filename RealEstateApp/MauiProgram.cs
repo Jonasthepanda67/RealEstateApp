@@ -21,6 +21,8 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<IPropertyService, MockRepository>();
+        builder.Services.AddSingleton<IAuthService, MockAuthService>();
+
         builder.Services.AddSingleton<PropertyListPage>();
         builder.Services.AddSingleton<PropertyListPageViewModel>();
 
@@ -35,6 +37,12 @@ public static class MauiProgram
 
         builder.Services.AddTransient<HeightCalculatorPage>();
         builder.Services.AddTransient<HeightCalculatorPageViewModel>();
+
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<SettingsPageViewModel>();
+
+        builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<LoginPageViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

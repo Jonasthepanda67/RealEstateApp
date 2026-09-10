@@ -122,8 +122,13 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     private async Task GetCurrentLocation()
     {
+
+        if (IsBusy)
+            return;
         try
         {
+            IsBusy = true;
+
             var request = new GeolocationRequest(
                 GeolocationAccuracy.Best,
                 TimeSpan.FromSeconds(10));
@@ -161,6 +166,10 @@ public class AddEditPropertyPageViewModel : BaseViewModel
                 "Location Error",
                 $"Unable to get your current location.\n\n{ex.Message}",
                 "OK");
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
     private Command geocodeAddressCommand;

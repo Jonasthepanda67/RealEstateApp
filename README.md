@@ -1,291 +1,102 @@
 # 🏠 RealEstateApp
 
-A cross-platform real estate application built with **.NET MAUI** and **C#**, using the **MVVM architecture**.
+A cross-platform real estate application built with **.NET MAUI**, **C#** and **MVVM**.
 
-The application allows users to browse a collection of properties, view detailed property information, see associated agents, calculate distances from their current location, and add or edit property listings.
+The app lets users browse properties, view detailed listings, interact with agents, use location-based features and manage property information.
 
-> 🚧 This project currently uses an in-memory mock repository for its data. It is designed as a foundation for future expansion with persistent storage and additional real-estate functionality.
+> **Current version:** `V0.8.0`  
+> **Development branch:** `develop`
 
 ---
 
-## 📱 Screenshots
+## 📸 Screenshots
 
-### Property List
+| Property List | Property Details |
+| --- | --- |
+| ![Property List](images/PropertiesList.png) | ![Property Details](images/PropertyDetail.png) |
 
-![Property List](images/PropertiesList.png)
+| Add Property | Edit Property |
+| --- | --- |
+| ![Add Property](images/Add.png) | ![Edit Property](images/Edit.png) |
 
-### Property Details
+| Login | Settings |
+| --- | --- |
+| ![Login](images/Login.png) | ![Settings](images/Settings.png) |
 
-![Property Details](images/DetailView.png)
+| Navigation | About |
+| --- | --- |
+| ![Navigation](images/NavMenu.png) | ![About](images/About.png) |
 
-### Add Property
-
-![Add Property](images/Add.png)
-
-### Edit Property
-
-![Edit Property](images/EditView.png)
-
-### Navigation
-
-![Navigation](images/FlyoutMenu.png)
-
-### About
-
-![About](images/About.png)
+| Height Calculator |
+| --- |
+| ![Height Calculator](images/HeightCalculator.png) |
 
 ---
 
 ## ✨ Features
 
-### 🏘️ Property Listings
-
-* Browse available properties in a scrollable list.
-* View:
-
-  * Property name
-  * Address
-  * Price
-  * Number of bedrooms
-  * Number of bathrooms
-  * Parking capacity
-  * Land size
-  * Distance from the user's current location
-* Property images are displayed directly in the listing.
-* Pull-to-refresh reloads the property collection.
-* Sort properties by distance from the user's current location.
-
-### 🔎 Property Details
-
-Selecting a property opens a dedicated details page containing:
-
-* Property image carousel
-* Property name
-* Price
-* Address
-* Property type
-* Property tier
-* Bedrooms
-* Bathrooms
-* Parking capacity
-* Land size
-* Description
-* Latitude and longitude
-* Listing agent information
-* Agent image
-* Agent specialization
-
-Properties can also be edited directly from the details page.
-
-### ➕ Add & Edit Properties
-
-The application provides a shared form for both creating and editing properties.
-
-Users can enter or modify:
-
-* Address
-* Price
-* Bedrooms
-* Bathrooms
-* Parking
-* Land size
-* Description
-* Listing agent
-* Location coordinates
-
-The form also includes validation for required fields and provides feedback when required information is missing.
-
-### 📍 Location & Geocoding
-
-The application uses device location services to provide location-aware functionality.
-
-#### Current Location
-
-The property list can retrieve the user's current location and calculate the distance to properties using kilometers.
-
-#### Address Geocoding
-
-When adding or editing a property, an address can be converted into latitude and longitude coordinates.
-
-#### Reverse Geocoding
-
-The application can also retrieve the user's current coordinates and generate an address from the available location information.
+- 🏘️ Browse and sort property listings
+- 🔎 Detailed property information and image galleries
+- ➕ Add and edit properties
+- 📍 Geolocation, geocoding and distance calculation
+- 🗺️ Maps and directions
+- 👤 Agent and vendor information
+- 📞 Email, SMS and phone contact
+- 📤 Property sharing
+- 📄 Property contracts
+- 🌍 Neighborhood information
+- 🔊 Text-to-Speech
+- 🔋 Battery and connectivity information
+- 📳 Haptics and vibration
+- 🔦 Flashlight
+- 🧭 Compass and barometer
+- 🔐 Login and logout
+- ⚙️ Saved application preferences
 
 ---
 
-## 🏢 Property Types
+## 🛠️ Tech Stack
 
-Properties are categorized using the following types:
+| Technology | Purpose |
+| --- | --- |
+| **C#** | Application language |
+| **.NET 10** | Framework |
+| **.NET MAUI** | Cross-platform UI |
+| **XAML** | User interface |
+| **MVVM** | Architecture |
+| **.NET MAUI Shell** | Navigation |
+| **Dependency Injection** | Service registration |
+| **Geolocation / Geocoding** | Location features |
+| **Font Awesome** | Icons |
+| **Open Sans** | Application font |
 
-| Type        |           |
-| ----------- | --------- |
-| `APARTMENT` | Apartment |
-| `PENTHOUSE` | Penthouse |
-| `MANSION`   | Mansion   |
-| `HOUSE`     | House     |
-| `OFFICE`    | Office    |
-| `BUNKER`    | Bunker    |
-| `CLUBHOUSE` | Clubhouse |
-| `NIGHTCLUB` | Nightclub |
-| `AUTOSHOP`  | Autoshop  |
-| `ARCADE`    | Arcade    |
+### Platforms
 
-Properties also have a tier classification:
-
-* `LEGENDARY`
-* `PREMIUM`
-* `COMMERCIAL`
-* `TACTICAL`
-* `COMMON`
+- Android
+- iOS
+- macOS via MacCatalyst
+- Windows
 
 ---
 
-## 🧑‍💼 Real Estate Agents
+## 🏗️ Architecture
 
-Properties can be associated with a real estate agent.
-
-Agent information includes:
-
-* Name
-* Email
-* Phone number
-* Description
-* Website
-* Specialization
-* Agent type
-* Opening hours
-* Agent image
-
-The included sample data contains fictional real-estate businesses such as **Dynasty 8**, **Dynasty 8 Executive**, and **Maze Bank Foreclosures**, with properties based around Los Santos.
-
----
-
-## 🗂️ Project Structure
-
-The application follows an MVVM-oriented structure:
+The project follows **MVVM** with services handling application and data logic.
 
 ```text
-RealEstateApp/
-│
-├── Converters/
-│
-├── Helpers/
-│
-├── Models/
-│   ├── Agent.cs
-│   ├── Property.cs
-│   ├── PropertyImage.cs
-│   ├── PropertyListItem.cs
-│   ├── PropertyTier.cs
-│   └── PropertyType.cs
-│
-├── Platforms/
-│   ├── Android/
-│   ├── iOS/
-│   ├── MacCatalyst/
-│   ├── Tizen/
-│   └── Windows/
-│
-├── Properties/
-│
-├── Resources/
-│   ├── AppIcon/
-│   ├── Fonts/
-│   ├── Images/
-│   ├── Raw/
-│   ├── Splash/
-│   └── Styles/
-│
-├── Services/
-│   ├── IPropertyService.cs
-│   └── MockRepository.cs
-│
-├── ViewModels/
-│   ├── AddEditPropertyPageViewModel.cs
-│   ├── BaseViewModel.cs
-│   ├── PropertyDetailPageViewModel.cs
-│   └── PropertyListPageViewModel.cs
-│
-├── Views/
-│   ├── AboutPage.xaml
-│   ├── AddEditPropertyPage.xaml
-│   ├── PropertyDetailPage.xaml
-│   └── PropertyListPage.xaml
-│
-├── App.xaml
-├── AppShell.xaml
-├── GlobalSettings.cs
-├── MauiProgram.cs
-└── RealEstateApp.csproj
+Views
+  ↓
+ViewModels
+  ↓
+Services
+  ↓
+Models
 ```
 
 ---
 
-## 🧱 Architecture
-
-The application is structured around **MVVM (Model-View-ViewModel)**.
-
-### Models
-
-The model layer contains the application's core data structures, including:
-
-* `Property`
-* `Agent`
-* `PropertyImage`
-* `PropertyListItem`
-* `PropertyType`
-* `PropertyTier`
-
-A `Property` contains information such as its price, address, description, property type, tier, bedrooms, bathrooms, parking, land size, agent ID, images, and geographic coordinates.
-
-### Views
-
-The UI is implemented using **XAML** pages:
-
-* `PropertyListPage`
-* `PropertyDetailPage`
-* `AddEditPropertyPage`
-* `AboutPage`
-
-### ViewModels
-
-The ViewModels contain the application's presentation logic and commands.
-
-For example:
-
-* `PropertyListPageViewModel`
-
-  * Loads properties
-  * Handles pull-to-refresh
-  * Retrieves user location
-  * Calculates property distances
-  * Sorts properties
-  * Handles navigation
-
-* `PropertyDetailPageViewModel`
-
-  * Loads selected property information
-  * Finds the associated agent
-  * Builds the property image carousel
-  * Handles navigation to editing
-
-* `AddEditPropertyPageViewModel`
-
-  * Handles creating and editing properties
-  * Validates required fields
-  * Handles agent selection
-  * Handles location retrieval
-  * Handles address geocoding
-  * Saves properties
-
----
-
-## 💾 Data Storage
-
-The current version uses a **mock repository** rather than a database.
-
-`MockRepository` implements `IPropertyService` and initially loads the sample properties and agents into memory.
-
+💾 Data Storage
+The current version uses an in-memory mock repository rather than a database.
 ```text
 IPropertyService
        │
@@ -296,185 +107,179 @@ MockRepository
        ├── GetAgents()
        └── SaveProperty()
 ```
-
 New properties are added to the in-memory collection, while existing properties are replaced when they share the same ID.
 
-### ⚠️ Persistence
-
-Changes are currently **not persisted between application launches**.
-
-Restarting the application reloads the original mock data.
-
-A future database-backed implementation could replace `MockRepository` without requiring the ViewModels to depend directly on a specific storage implementation.
-
+## ⚠️ Persistence
+* Property data changes are currently not persisted between application launches.
+* Restarting the application reloads the original mock data.
+* The service abstraction allows a future database or API-backed implementation to replace `MockRepository` without requiring the ViewModels to directly depend on a specific storage implementation.
+  
 ---
 
-## 🧭 Navigation
-
-The application uses **.NET MAUI Shell navigation**.
-
-Current main navigation consists of:
-
-* 🏠 **Property List**
-* ℹ️ **About**
-
-Additional pages are reached through commands and Shell routes:
+🧭 Navigation
+The application uses .NET MAUI Shell navigation.
+The main navigation includes:
+🏠 Property List
+ℹ️ About
+🔐 Login
+⚙️ Settings
+Additional pages and actions are reached through commands and Shell routes.
 
 ```text
-Property List
-    │
-    ├── Select Property
-    │       └── Property Details
-    │               └── Edit Property
-    │
-    └── Add
-            └── Add Property
+Login
+  │
+  └── Property List
+          │
+          ├── Select Property
+          │       └── Property Details
+          │               ├── Edit Property
+          │               ├── Contact
+          │               ├── Share
+          │               ├── Contract
+          │               ├── Maps
+          │               └── Neighborhood
+          │
+          └── Add Property
+
+Settings
+  │
+  └── Saved Preferences
+
+About
 ```
 
 ---
 
-## 🛠️ Tech Stack
-
-| Technology               | Usage                              |
-| ------------------------ | ---------------------------------- |
-| **C#**                   | Application language               |
-| **.NET 10**              | Runtime / framework                |
-| **.NET MAUI**            | Cross-platform UI framework        |
-| **XAML**                 | User interface definitions         |
-| **MVVM**                 | Application architecture           |
-| **Dependency Injection** | Service and ViewModel registration |
-| **.NET MAUI Shell**      | Navigation                         |
-| **Geolocation**          | Current device location            |
-| **Geocoding**            | Address ↔ coordinate conversion    |
-| **Font Awesome**         | UI icons                           |
-| **Open Sans**            | Application font                   |
-
-The project currently targets:
-
-* Android
-* iOS
-* macOS via Mac Catalyst
-* Windows
-
-A Tizen target is present in the project configuration as commented-out support.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
+🚀 Getting Started
+Prerequisites
 You will need:
-
-* Visual Studio with .NET MAUI support
-* .NET 10 SDK
-* A supported .NET MAUI development environment
-* An emulator, simulator, or physical device for your target platform
-
-### Clone the Repository
-
+Visual Studio with .NET MAUI support
+.NET 10 SDK
+A supported .NET MAUI development environment
+An Android emulator, iOS simulator, MacCatalyst environment, Windows machine, or compatible physical device depending on the target platform
+Clone the Repository
 ```bash
 git clone https://github.com/Jonasthepanda67/RealEstateApp.git
 cd RealEstateApp
 ```
-
-### Open the Project
-
-Open the solution:
-
+Open the Project
+Open:
 ```text
 RealEstateApp.sln
 ```
-
-From there, select your desired target platform and run the application.
+Select your desired target platform and run the application.
 
 ---
 
-## 🖥️ Supported Platforms
-
-The project is configured for:
-
-```text
+🖥️ Supported Platforms
+The current project configuration targets:
 Android
 iOS
-MacCatalyst
+macOS via MacCatalyst
 Windows
-```
+Tizen support is present in the project configuration as commented-out code and is not currently enabled.
 
 ---
 
-## 🗺️ Location Permissions
-
-Because the application can retrieve the user's current location, the selected platform may require location permissions.
-
-Location functionality is used for:
-
-* Calculating distances between the user and properties
-* Retrieving the user's current coordinates
-* Reverse geocoding coordinates into an address
-
----
-
-## 📸 Property Images
-
-Property images are included as application resources and are associated with properties through their image URLs.
-
-The project also contains an MSBuild target that automatically generates a property image catalog during compilation by scanning the application's image resources.
+🎯 Current Tasks & Future Plans
+[ ] Persistent database storage
+[ ] User accounts with a proper backend
+[ ] Favorites / saved properties
+[ ] Advanced property filtering
+[ ] Search functionality
+[ ] Interactive in-app map view
+[ ] Property image uploading
+[ ] Agent/vendor management
+[ ] Property deletion
+[ ] Property type and tier selection in the add/edit form
+[ ] Improved validation
+[ ] Offline data persistence
 
 ---
 
-## 🎯 Future Improvements
-
-The current architecture leaves room for several possible improvements:
-
-* [ ] Persistent database storage
-* [ ] Cloud/API-backed property listings
-* [ ] User accounts
-* [ ] Favorites / saved properties
-* [ ] Advanced property filtering
-* [ ] Search functionality
-* [ ] Interactive map view
-* [ ] Property image uploading
-* [ ] Agent contact functionality
-* [ ] Property deletion
-* [ ] Property type and tier selection in the add/edit form
-* [ ] Improved validation
-* [ ] Offline data persistence
-* [ ] Additional platform-specific functionality
+🚧 Known Issues
+No major known issues are currently documented.
+The main architectural limitation is that property data is stored in memory and therefore resets when the application is restarted.
 
 ---
 
-## 📚 What This Project Demonstrates
-
-This project was built as a practical example of working with:
-
-* .NET MAUI
-* MVVM architecture
-* XAML data binding
-* `ObservableCollection`
-* `ICommand` / MAUI `Command`
-* Dependency Injection
-* Shell navigation
-* Query properties
-* Geolocation APIs
-* Geocoding APIs
-* Cross-platform application development
-* Reusable service abstractions
-* In-memory data repositories
-* Responsive mobile UI design
+🐞 Bug Reporting
+Bug reporting is not currently enabled for this project.
+If you encounter an issue, feel free to open an issue on GitHub or make your own improvements to the project.
 
 ---
 
-## 👨‍💻 Author
-
-**Jonasthepanda**
-
-GitHub: [@Jonasthepanda67](https://github.com/Jonasthepanda67)
+🔗 Tags & Links
+Versions are based around the version numbers used for the project's pull requests.
+Tags are intended to be created after each version has been merged and finalized.
+| Version | Pull Request(s) | Tag      |
+| ------- | --------------- | -------- |
+| V0.1.0  | #1, #2          | `V0.1.0` |
+| V0.2.0  | #3, #4          | `V0.2.0` |
+| V0.3.0  | #5, #6          | `V0.3.0` |
+| V0.4.0  | #7, #8          | `V0.4.0` |
+| V0.5.0  | #12             | `V0.5.0` |
+| V0.6.0  | #13, #14, #15   | `V0.6.0` |
+| V0.7.0  | #16, #17        | `V0.7.0` |
+| V0.8.0  | #18, #19        | `V0.8.0` |
+> **Current version:** `V0.8.0`  
+> The `V0.8.0` tag is prepared above and can be created once the current version is finalized.
 
 ---
 
-## 📄 License
+📜 Changelog
+V0.8.0
+Added login functionality.
+Added logout functionality.
+Added persistent Preferences/Settings for user preferences.
+Improved styling across multiple pages.
+Added and refreshed application screenshots.
+Continued improving the application experience around stored user state.
+V0.7.0
+Added Wikipedia browser functionality for property neighborhoods.
+Added functionality for opening property contract files.
+Added multiple ways to share property information.
+V0.6.0
+Added vendor support to properties.
+Added vendors to the property details page.
+Added email, SMS and phone contact functionality.
+Added maps functionality.
+Added the ability to open a map for a property.
+Added directions functionality.
+V0.5.0
+Added a barometer feature.
+Added the ability to save barometer information.
+V0.4.0
+Added Text-to-Speech for property descriptions.
+Added start/stop controls for Text-to-Speech.
+Added battery status functionality.
+Added battery-level feedback.
+Added flashlight functionality.
+V0.3.0
+Added connectivity detection.
+Added connection-aware UI behaviour.
+Disabled or hid location-dependent functionality when a connection is unavailable.
+Added haptic feedback.
+Added vibration functionality.
+V0.2.0
+Added current-location retrieval.
+Added property distance calculations.
+Added property sorting by distance.
+Added geocoding functionality.
+Added automatic address handling based on the user's current location.
+Added multiple location-related quality-of-life improvements.
+V0.1.0
+Added GTA V-inspired properties and agents.
+Added additional property details to the models.
+Added the initial real-estate property and agent data foundation.
 
+---
+
+👨‍💻 Author
+Jonasthepanda
+GitHub: @Jonasthepanda67
+
+---
+
+📄 License
 This project does not currently specify a license.
-
-If you intend to make the project open source, consider adding a license such as the MIT License.

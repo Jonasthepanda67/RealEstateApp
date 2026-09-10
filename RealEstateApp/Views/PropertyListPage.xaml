@@ -25,88 +25,173 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:PropertyListItem">
-                    <Grid Padding="5">
-                        <Frame HasShadow="True">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyListPageViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
+
+                    <Frame
+            Margin="8,6"
+            Padding="0"
+            CornerRadius="12"
+            HasShadow="True"
+            BackgroundColor="White">
+
+                        <Grid
+                RowDefinitions="180, Auto"
+                RowSpacing="0">
+
+                            <!-- Property Image -->
+                            <Image
+                    Grid.Row="0"
+                    Aspect="AspectFill"
+                    Source="{Binding Property.MainImageUrl}" />
+
+                            <!-- Information -->
                             <Grid
-                                Margin="0"
-                                Padding="0"
-                                BackgroundColor="White"
-                                ColumnDefinitions="Auto, *">
-                                <Image
-                                    Grid.Column="0"
-                                    Margin="0,0,10,0"
-                                    Aspect="AspectFit"
-                                    HeightRequest="120"
-                                    HorizontalOptions="Start"
-                                    Source="{Binding Property.MainImageUrl}" />
+                    Grid.Row="1"
+                    Padding="14"
+                    RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                    RowSpacing="7">
+
+                                <!-- Name -->
+                                <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="19"
+                        LineBreakMode="TailTruncation"
+                        Text="{Binding Property.Name}"
+                        TextColor="Black" />
+
+                                <!-- Address -->
+                                <Label
+                        Grid.Row="1"
+                        FontSize="14"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="1"
+                        Text="{Binding Property.Address}"
+                        TextColor="Gray" />
+
+                                <!-- Price -->
+                                <Label
+                        Grid.Row="2"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="{Binding Property.Price, StringFormat='{0:C0}'}"
+                        TextColor="#1976D2" />
+
+                                <!-- Beds / Baths / Parking -->
                                 <Grid
-                                    Grid.Column="1"
-                                    Margin="0,10,10,0"
-                                    RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-                                    RowSpacing="10">
+                        Grid.Row="3"
+                        ColumnDefinitions="Auto,Auto,20,Auto,Auto,20,Auto,Auto"
+                        ColumnSpacing="6">
+
                                     <Label
-                                        Grid.Row="0"
-                                        FontAttributes="Bold"
-                                        FontSize="16"
-                                        LineBreakMode="NoWrap"
-                                        Text="{Binding Property.Name}" />
+                            Grid.Column="0"
+                            FontFamily="FA-solid"
+                            FontSize="15"
+                            Text="{x:Static fa:IconFont.Bed}"
+                            TextColor="#555" />
+
                                     <Label
-                                        Grid.Row="1"
-                                        FontAttributes="None"
-                                        FontSize="14"
-                                        LineBreakMode="TailTruncation"
-                                        Text="{Binding Property.Address}" />
+                            Grid.Column="1"
+                            FontSize="14"
+                            Text="{Binding Property.Beds, StringFormat='{0} beds'}"
+                            TextColor="#555" />
+
                                     <Label
-                                        Grid.Row="2"
-                                        FontSize="13"
-                                        LineBreakMode="NoWrap"
-                                        Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
-                                    <Grid Grid.Row="3" ColumnDefinitions="*, *, *, *, *, *">
-                                        <Label
-                                            Grid.Column="0"
-                                            FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Bed}" />
-                                        <Label
-                                            Grid.Column="1"
-                                            FontSize="13"
-                                            Text="{Binding Property.Beds}" />
-                                        <Label
-                                            Grid.Column="2"
-                                            FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Bath}" />
-                                        <Label
-                                            Grid.Column="3"
-                                            FontSize="13"
-                                            Text="{Binding Property.Baths}" />
-                                        <Label
-                                            Grid.Column="4"
-                                            FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Parking}" />
-                                        <Label
-                                            Grid.Column="5"
-                                            FontSize="13"
-                                            Text="{Binding Property.Parking}" />
-                                    </Grid>
+                            Grid.Column="3"
+                            FontFamily="FA-solid"
+                            FontSize="15"
+                            Text="{x:Static fa:IconFont.Bath}"
+                            TextColor="#555" />
+
                                     <Label
-                                        Grid.Row="4"
-                                        FontSize="13"
-                                        Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}" />
+                            Grid.Column="4"
+                            FontSize="14"
+                            Text="{Binding Property.Baths, StringFormat='{0} baths'}"
+                            TextColor="#555" />
+
                                     <Label
-                                            Grid.Row="4"
-                                            FontSize="13"
-                                            Text="{Binding Distance, StringFormat='{0:0.00} km'}" />
+                            Grid.Column="6"
+                            FontFamily="FA-solid"
+                            FontSize="15"
+                            Text="{x:Static fa:IconFont.Parking}"
+                            TextColor="#555" />
+
+                                    <Label
+                            Grid.Column="7"
+                            FontSize="14"
+                            Text="{Binding Property.Parking, StringFormat='{0} parking'}"
+                            TextColor="#555" />
+
                                 </Grid>
+
+                                <!-- Land Size + Distance -->
+                                <Grid
+                        Grid.Row="4"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="10">
+
+                                    <Label
+                            Grid.Column="0"
+                            FontSize="13"
+                            Text="{Binding Property.LandSize, StringFormat='Land: {0} m²'}"
+                            TextColor="#666" />
+
+                                    <Label
+                            Grid.Column="1"
+                            FontSize="13"
+                            HorizontalTextAlignment="End"
+                            Text="{Binding Distance, StringFormat='Distance: {0:0.00} km'}"
+                            TextColor="#666" />
+
+                                </Grid>
+
+                                <!-- Type + Tier -->
+                                <HorizontalStackLayout
+                        Grid.Row="5"
+                        Spacing="8">
+
+                                    <Border
+                            Padding="8,3"
+                            BackgroundColor="#E3F2FD"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8">
+
+                                        <Label
+                                FontSize="12"
+                                Text="{Binding Property.Type}"
+                                TextColor="#1565C0" />
+
+                                    </Border>
+
+                                    <Border
+                            Padding="8,3"
+                            BackgroundColor="#FFF3E0"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8">
+
+                                        <Label
+                                FontSize="12"
+                                Text="{Binding Property.Tier}"
+                                TextColor="#EF6C00" />
+
+                                    </Border>
+
+                                </HorizontalStackLayout>
+
                             </Grid>
-                        </Frame>
-                    </Grid>
+
+                        </Grid>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyListPageViewModel}}, Path=GoToDetailsCommand}"
+                    CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+
+                    </Frame>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
 
         </CollectionView>
     </RefreshView>

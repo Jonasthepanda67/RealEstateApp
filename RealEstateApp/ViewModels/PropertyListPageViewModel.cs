@@ -10,7 +10,7 @@ public class PropertyListPageViewModel : BaseViewModel
 {
     public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new();
     private Location _currentLocation;
-    private bool sortFurthestFirst = false;
+    private bool sortFurthestFirst = !Preferences.Get("sortByClosest", true);
 
     private readonly IPropertyService service;
 
@@ -71,7 +71,7 @@ public class PropertyListPageViewModel : BaseViewModel
         catch (Exception ex)
         {
             Debug.WriteLine($"Unable to get properties: {ex.Message}");
-            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+            await Shell.Current.DisplayAlertAsync("Error!", ex.Message, "OK");
         }
         finally
         {
@@ -130,6 +130,7 @@ public class PropertyListPageViewModel : BaseViewModel
             return;
 
         sortFurthestFirst = !sortFurthestFirst;
+        Preferences.Set("sortByClosest", !sortFurthestFirst);
 
         SortProperties();
     }

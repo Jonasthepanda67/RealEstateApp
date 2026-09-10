@@ -1,0 +1,190 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
+    x:Class="RealEstateApp.Views.SettingsPage"
+    x:DataType="vm:SettingsPageViewModel"
+    Title="Settings"
+    BackgroundColor="{AppThemeBinding Light=#F5F6F8, Dark=#121212}">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="15,20,15,35"
+            Spacing="16">
+
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Audio" />
+
+            <Border
+                Padding="15"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="8">
+
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Volume"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Column="1"
+                            FontSize="13"
+                            Text="{Binding Volume, StringFormat='{0:F2}'}"
+                            TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+
+                    <Slider
+                        x:Name="VolumeSlider"
+                        Maximum="2"
+                        Minimum="0"
+                        Value="{Binding Volume, Mode=TwoWay}" />
+
+
+                    <Grid
+                        ColumnDefinitions="*,Auto"
+                        Margin="0,12,0,0">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Pitch"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Column="1"
+                            FontSize="13"
+                            Text="{Binding Pitch, StringFormat='{0:F2}'}"
+                            TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+
+                    <Slider
+                        x:Name="PitchSlider"
+                        Maximum="2"
+                        Minimum="0"
+                        Value="{Binding Pitch, Mode=TwoWay}" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Property List" />
+
+            <Border
+                Padding="15"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <VerticalStackLayout
+                        Spacing="3"
+                        VerticalOptions="Center">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Sort by closest" />
+
+                        <Label
+                            FontSize="12"
+                            Text="Show the nearest properties first"
+                            TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                    </VerticalStackLayout>
+
+                    <CheckBox
+                        Grid.Column="1"
+                        IsChecked="{Binding SortByClosest, Mode=TwoWay}"
+                        Color="#3F51B5"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+            </Border>
+
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Margin="0,5,0,0"
+                Text="Reset" />
+
+            <Border
+                Padding="15"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                Stroke="#E57373"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <VerticalStackLayout
+                        Spacing="3"
+                        VerticalOptions="Center">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Reset Settings" />
+
+                        <Label
+                            FontSize="12"
+                            Text="Restore volume, pitch and sorting defaults"
+                            TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                    </VerticalStackLayout>
+
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding ResetSettingsCommand}"
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="Reset"
+                        TextColor="#D32F2F"
+                        BackgroundColor="{AppThemeBinding Light=#FFEBEE, Dark=#3A2020}"
+                        Padding="14,8"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+            </Border>
+
+
+            <BoxView HeightRequest="10" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

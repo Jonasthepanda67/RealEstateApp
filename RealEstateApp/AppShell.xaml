@@ -21,4 +21,21 @@
         ContentTemplate="{DataTemplate views:AboutPage}"
         Route="about" />
 
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate views:SettingsPage}"
+        Route="settings" />
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="login"
+        IsVisible="{Binding IsLoggedOut}" />
+
+    <ShellContent
+        Title="Logout"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="logout"
+        IsVisible="{Binding IsLoggedIn}" />
+
 </Shell>
