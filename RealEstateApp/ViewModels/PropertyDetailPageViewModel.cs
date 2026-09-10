@@ -2,14 +2,12 @@
 using RealEstateApp.Services;
 using RealEstateApp.Views;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Metrics;
 using System.Text.Json;
 using System.Windows.Input;
 
 namespace RealEstateApp.ViewModels;
 
-[QueryProperty(nameof(PropertyListItem), "MyPropertyListItem")]
-public class PropertyDetailPageViewModel : BaseViewModel
+public class PropertyDetailPageViewModel : BaseViewModel, IQueryAttributable
 {
     private readonly IPropertyService service;
     public PropertyDetailPageViewModel(IPropertyService service)
@@ -152,15 +150,17 @@ public class PropertyDetailPageViewModel : BaseViewModel
     private Command tTSStartCommand;
     public ICommand TTSStartCommand => tTSStartCommand ??= new Command(async () => await TTSStartExecute());
     private CancellationTokenSource cts;
-    SpeechOptions options = new SpeechOptions()
-    {
-        Pitch = Preferences.Get("pitch", 1),
-        Volume = Preferences.Get("volume", 1),
-        Rate = 1.0f,    // 0.1 - 2.0
-    };
+    
     private async Task TTSStartExecute()
     {
         cts = new CancellationTokenSource();
+
+        SpeechOptions options = new SpeechOptions()
+        {
+            Pitch = (float)Preferences.Get("pitch", 1.0d),
+            Volume = (float)Preferences.Get("volume", 1.0d),
+            Rate = 1.0f,    // 0.1 - 2.0
+        };
 
         TTSIsPlaying = true;
         TTSIsNotPlaying = false;
@@ -367,4 +367,14 @@ public class PropertyDetailPageViewModel : BaseViewModel
     }
 
     #endregion
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("MyPropertyListItem", out var value)
+            && value is PropertyListItem item)
+        {
+            PropertyListItem = item;
+        }
+    }
+
 }

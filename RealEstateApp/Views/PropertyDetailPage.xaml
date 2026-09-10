@@ -3,10 +3,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fa="clr-namespace:FontAwesome"
-    xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
     xmlns:model="clr-namespace:RealEstateApp.Models"
+    xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
+    x:DataType="vm:PropertyDetailPageViewModel"
     Title="{Binding Property.Name}"
-    x:DataType="vm:PropertyDetailPageViewModel">
+    BackgroundColor="{AppThemeBinding Light=#F5F6F8, Dark=#121212}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -14,103 +15,258 @@
             Text="Edit" />
     </ContentPage.ToolbarItems>
 
-    <Grid RowDefinitions="250,*">
+    <Grid RowDefinitions="280,*">
 
-        <CarouselView
-    Grid.Row="0"
-    ItemsSource="{Binding PropertyImages}"
-    Loop="False"
-    HorizontalOptions="Fill"
-    VerticalOptions="Fill">
+        <Border
+        Grid.Row="0"
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 0,0,0,20"
+        BackgroundColor="Black">
 
-            <CarouselView.ItemTemplate>
-                <DataTemplate x:DataType="model:PropertyImage">
+            <CarouselView
+            ItemsSource="{Binding PropertyImages}"
+            Loop="False"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
 
-                    <Image
-                Source="{Binding ImageUrl}"
-                HeightRequest="250"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill"
-                Aspect="AspectFill" />
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="model:PropertyImage">
 
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
+                        <Grid
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill">
 
-        </CarouselView>
+                            <Image
+                            Source="{Binding ImageUrl}"
+                            Aspect="AspectFill"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill" />
 
+                        </Grid>
+
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+
+            </CarouselView>
+
+        </Border>
 
 
         <ScrollView Grid.Row="1">
 
             <VerticalStackLayout
-                Padding="15"
-                Spacing="10">
+                Padding="15,20,15,35"
+                Spacing="16">
 
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    Text="{Binding Property.Price, StringFormat='{0:C0}'}"
-                    TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
-
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="20"
-                    Text="{Binding Property.Name}" />
-
-                <HorizontalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="5">
 
                     <Label
-                        FontSize="16"
-                        Text="📍"
-                        VerticalOptions="Center" />
+                        FontAttributes="Bold"
+                        FontSize="25"
+                        Text="{Binding Property.Name}"
+                        TextColor="{AppThemeBinding Light=#171717, Dark=#FFFFFF}" />
 
-                    <Label
-                        FontSize="15"
-                        Text="{Binding Property.Address}"
-                        VerticalOptions="Center" />
+                    <HorizontalStackLayout Spacing="6">
 
-                </HorizontalStackLayout>
+                        <Label
+                            FontSize="15"
+                            Text="📍"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            FontSize="15"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding Property.Address}"
+                            TextColor="{AppThemeBinding Light=#666666, Dark=#BBBBBB}"
+                            VerticalOptions="Center" />
+
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+
+                <Border
+                    Padding="12"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <Grid
+                        ColumnDefinitions="*,*,*,*"
+                        ColumnSpacing="5">
+
+                        <!-- Beds -->
+                        <VerticalStackLayout
+                            Grid.Column="0"
+                            HorizontalOptions="Center"
+                            Spacing="4">
+
+                            <Label
+                                FontFamily="FA-solid"
+                                FontSize="19"
+                                HorizontalOptions="Center"
+                                Text="{x:Static fa:IconFont.Bed}"
+                                TextColor="{AppThemeBinding Light=#3F51B5, Dark=#90CAF9}" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="17"
+                                HorizontalOptions="Center"
+                                Text="{Binding Property.Beds}" />
+
+                            <Label
+                                FontSize="11"
+                                HorizontalOptions="Center"
+                                Text="Beds"
+                                TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                        </VerticalStackLayout>
+
+
+                        <!-- Baths -->
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            Spacing="4">
+
+                            <Label
+                                FontFamily="FA-solid"
+                                FontSize="19"
+                                HorizontalOptions="Center"
+                                Text="{x:Static fa:IconFont.Bath}"
+                                TextColor="{AppThemeBinding Light=#3F51B5, Dark=#90CAF9}" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="17"
+                                HorizontalOptions="Center"
+                                Text="{Binding Property.Baths}" />
+
+                            <Label
+                                FontSize="11"
+                                HorizontalOptions="Center"
+                                Text="Baths"
+                                TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                        </VerticalStackLayout>
+
+
+                        <!-- Parking -->
+                        <VerticalStackLayout
+                            Grid.Column="2"
+                            HorizontalOptions="Center"
+                            Spacing="4">
+
+                            <Label
+                                FontFamily="FA-solid"
+                                FontSize="19"
+                                HorizontalOptions="Center"
+                                Text="{x:Static fa:IconFont.Parking}"
+                                TextColor="{AppThemeBinding Light=#3F51B5, Dark=#90CAF9}" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="17"
+                                HorizontalOptions="Center"
+                                Text="{Binding Property.Parking}" />
+
+                            <Label
+                                FontSize="11"
+                                HorizontalOptions="Center"
+                                Text="Parking"
+                                TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                        </VerticalStackLayout>
+
+
+                        <!-- Land -->
+                        <VerticalStackLayout
+                            Grid.Column="3"
+                            HorizontalOptions="Center"
+                            Spacing="4">
+
+                            <Label
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                Text="㎡"
+                                TextColor="{AppThemeBinding Light=#3F51B5, Dark=#90CAF9}" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="17"
+                                HorizontalOptions="Center"
+                                Text="{Binding Property.LandSize}" />
+
+                            <Label
+                                FontSize="11"
+                                HorizontalOptions="Center"
+                                Text="Land Size"
+                                TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
 
 
                 <Grid
                     ColumnDefinitions="*,*"
-                    ColumnSpacing="10"
-                    Margin="0,5,0,0">
+                    ColumnSpacing="10">
 
                     <Border
                         Grid.Column="0"
-                        Padding="10"
-                        StrokeShape="RoundRectangle 8">
+                        Padding="13"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                        Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
 
                         <VerticalStackLayout Spacing="3">
 
                             <Label
-                                FontSize="12"
-                                Text="PROPERTY TYPE" />
+                                FontSize="10"
+                                Text="PROPERTY TYPE"
+                                TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
 
                             <Label
                                 FontAttributes="Bold"
-                                FontSize="15"
+                                FontSize="16"
                                 Text="{Binding Property.Type}" />
 
                         </VerticalStackLayout>
 
                     </Border>
 
+
                     <Border
                         Grid.Column="1"
-                        Padding="10"
-                        StrokeShape="RoundRectangle 8">
+                        Padding="13"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                        Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
 
                         <VerticalStackLayout Spacing="3">
 
                             <Label
-                                FontSize="12"
-                                Text="TIER" />
+                                FontSize="10"
+                                Text="PROPERTY TIER"
+                                TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
 
                             <Label
                                 FontAttributes="Bold"
-                                FontSize="15"
+                                FontSize="16"
                                 Text="{Binding Property.Tier}" />
 
                         </VerticalStackLayout>
@@ -120,327 +276,300 @@
                 </Grid>
 
 
+                <Border
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="19"
+                                Text="Description"
+                                VerticalOptions="Center" />
+
+                            <HorizontalStackLayout
+                                Grid.Column="1"
+                                Spacing="5">
+
+                                <Button
+                                    Command="{Binding TTSStartCommand}"
+                                    FontFamily="FA-solid"
+                                    FontSize="13"
+                                    Padding="10,5"
+                                    Text="{x:Static fa:IconFont.Play}"
+                                    IsVisible="{Binding TTSIsNotPlaying}" />
+
+                                <Button
+                                    Command="{Binding TTSStopCommand}"
+                                    FontFamily="FA-solid"
+                                    FontSize="13"
+                                    Padding="10,5"
+                                    Text="{x:Static fa:IconFont.Stop}"
+                                    IsVisible="{Binding TTSIsPlaying}" />
+
+                            </HorizontalStackLayout>
+
+                        </Grid>
+
+                        <Label
+                            FontSize="14"
+                            LineBreakMode="WordWrap"
+                            LineHeight="1.3"
+                            Text="{Binding Property.Description}"
+                            TextColor="{AppThemeBinding Light=#444444, Dark=#CCCCCC}" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
                 <Label
-                    Margin="0,15,0,0"
                     FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Property Details" />
+                    FontSize="19"
+                    Margin="0,5,0,0"
+                    Text="Property Links" />
 
                 <Grid
-                    ColumnDefinitions="*,*,*"
-                    RowDefinitions="Auto,Auto"
-                    ColumnSpacing="5"
-                    RowSpacing="10">
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10">
 
-                    <VerticalStackLayout
-                        Grid.Row="0"
+                    <Button
                         Grid.Column="0"
-                        HorizontalOptions="Center"
-                        Spacing="3">
+                        Command="{Binding OpenBrowserCommand}"
+                        ImageSource="link_2.png"
+                        Text="Neighborhood"
+                        FontSize="13"
+                        Padding="5,10"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
 
-                        <Label
-                            FontFamily="FA-solid"
-                            FontSize="18"
-                            HorizontalOptions="Center"
-                            Text="{x:Static fa:IconFont.Bed}" />
-
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            Text="{Binding Property.Beds}" />
-
-                        <Label
-                            FontSize="12"
-                            HorizontalOptions="Center"
-                            Text="Bedrooms" />
-
-                    </VerticalStackLayout>
-
-
-                    <VerticalStackLayout
-                        Grid.Row="0"
+                    <Button
                         Grid.Column="1"
-                        HorizontalOptions="Center"
-                        Spacing="3">
-
-                        <Label
-                            FontFamily="FA-solid"
-                            FontSize="18"
-                            HorizontalOptions="Center"
-                            Text="{x:Static fa:IconFont.Bath}" />
-
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            Text="{Binding Property.Baths}" />
-
-                        <Label
-                            FontSize="12"
-                            HorizontalOptions="Center"
-                            Text="Bathrooms" />
-
-                    </VerticalStackLayout>
-
-
-                    <VerticalStackLayout
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        HorizontalOptions="Center"
-                        Spacing="3">
-
-                        <Label
-                            FontFamily="FA-solid"
-                            FontSize="18"
-                            HorizontalOptions="Center"
-                            Text="{x:Static fa:IconFont.Parking}" />
-
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            Text="{Binding Property.Parking}" />
-
-                        <Label
-                            FontSize="12"
-                            HorizontalOptions="Center"
-                            Text="Parking" />
-
-                    </VerticalStackLayout>
-
-
-                    <VerticalStackLayout
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        HorizontalOptions="Center"
-                        Spacing="3">
-
-                        <Label
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            Text="㎡" />
-
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            Text="{Binding Property.LandSize}" />
-
-                        <Label
-                            FontSize="12"
-                            HorizontalOptions="Center"
-                            Text="Land Size" />
-
-                    </VerticalStackLayout>
+                        Command="{Binding OpenContractCommand}"
+                        ImageSource="file_open.png"
+                        Text="Contract"
+                        FontSize="13"
+                        Padding="5,10"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
 
                 </Grid>
 
+
+
                 <Label
-                        FontAttributes="Bold"
-                        FontSize="17"
-                        Text="Other Features"/>
-
-                <Border>
-                    <HorizontalStackLayout Spacing="15">
-                        <VerticalStackLayout Margin="10,5,10,5" Spacing="15">
-
-                            <Label
-                FontSize="13"
-                Text="Neighborhood"/>
-
-                            <Button
-            Command="{Binding OpenBrowserCommand}"
-            ImageSource="link_2.png"/>
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Margin="10,5,10,5" Spacing="15">
-
-                            <Label
-                FontSize="13"
-                Text="Contract"  />
-
-                            <Button
-            Command="{Binding OpenContractCommand}"
-            ImageSource="file_open.png"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Border>
-
-                <Border>
-                <Grid Margin="10,5,10,15"
-                          ColumnSpacing="10"
-                          RowSpacing="10"
-                          ColumnDefinitions="*,*,*"
-                          RowDefinitions="*,*">
-
-
-                    <Label
-                            FontSize="13"
-                            Text="Share Text"
-                            Grid.Column="0"
-                            Grid.Row="0" />
-
-                    <Label
-                            FontSize="13"
-                            Text="Share Contract"
-                            Grid.Column="1"
-                            Grid.Row="0" />
-
-                    <Label
-                            FontSize="13"
-                            Text="Clipboard"
-                            Grid.Column="2"
-                            Grid.Row="0" />
-
-                    <Button
-                            Command="{Binding ShareTextCommand}"
-                            ImageSource="share.png"
-                            Grid.Column="0"
-                            Grid.Row="1" />
-
-                    <Button
-                            Command="{Binding ShareContractCommand}"
-                            ImageSource="file_export.png"
-                            Grid.Column="1"
-                            Grid.Row="1" />
-
-                    <Button
-                            Command="{Binding CopyToClipboardCommand}"
-                            ImageSource="clipboard_paste.png"
-                            Grid.Column="2"
-                            Grid.Row="1" />
-                </Grid>
-                </Border>
-
-                <HorizontalStackLayout>
-                    
-                    <Label
-                    Margin="0,15,0,0"
                     FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Description" />
-                    
-                    <Button
-                        Margin="10,15,0,0"
-                        Command="{Binding TTSStartCommand}"
-                        FontFamily="FA-solid"
-                        FontSize="15"
-                        Text="{x:Static fa:IconFont.Play}"
-                        IsVisible="{Binding TTSIsNotPlaying}" />
-
-                    <Button
-                        Margin="10,15,0,0"
-                        Command="{Binding TTSStopCommand}"
-                        FontFamily="FA-solid"
-                        FontSize="15"
-                        Text="{x:Static fa:IconFont.Stop}"
-                        IsVisible="{Binding TTSIsPlaying}" />
-
-                </HorizontalStackLayout>
-
-                <Label
-                    FontSize="14"
-                    LineBreakMode="WordWrap"
-                    Text="{Binding Property.Description}" />
-
-
-                <Label
-                    Margin="0,15,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Location" />
-
-                <VerticalStackLayout Spacing="5">
-
-                    <Label
-                        FontSize="14"
-                        Text="{Binding Property.Address}" />
-
-                    <Label
-                        FontSize="12"
-                        Text="{Binding Property.Latitude, StringFormat='Latitude: {0}'}" />
-
-                    <Label
-                        FontSize="12"
-                        Text="{Binding Property.Longitude, StringFormat='Longitude: {0}'}" />
-
-                    <HorizontalStackLayout
-                        Spacing="10"
-                        Margin="0,10,0,0">
-                        
-                        <Button
-                        Command="{Binding OpenMapMarkedCommand}"
-                        FontSize="14"
-                        ImageSource="map.png" />
-
-                        <Button
-                        Command="{Binding OpenMapDirectionsCommand}"
-                        FontSize="14"
-                        ImageSource="directions.png" />
-
-                    </HorizontalStackLayout>
-
-                </VerticalStackLayout>
-
-                <Label
-                    Margin="0,20,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Vendor" />
+                    FontSize="19"
+                    Margin="0,5,0,0"
+                    Text="Share" />
 
                 <Border
-                    Padding="12"
-                    StrokeShape="RoundRectangle 12">
+                    Padding="10"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
 
-                    <Grid ColumnDefinitions="*"
-                          Margin="5">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
-                        <VerticalStackLayout
-                            Spacing="15">
+                    <Grid
+                        ColumnDefinitions="*,*,*"
+                        ColumnSpacing="5">
 
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="17"
-                                Text="{Binding Property.Vendor.FullName}" />
+                        <Button
+                            Grid.Column="0"
+                            Command="{Binding ShareTextCommand}"
+                            ImageSource="share.png"
+                            Text="Share"
+                            FontSize="12"
+                            Padding="3,10"
+                            HorizontalOptions="Fill" />
 
+                        <Button
+                            Grid.Column="1"
+                            Command="{Binding ShareContractCommand}"
+                            ImageSource="file_export.png"
+                            Text="File"
+                            FontSize="12"
+                            Padding="3,10"
+                            HorizontalOptions="Fill" />
 
-                            <Label
-                                FontSize="13"
-                                FontAttributes="Bold"
-                                Text="{Binding Property.Vendor.Email}" />
-
-
-                            <Label
-                                FontSize="13"
-                                FontAttributes="Bold"
-                                Text="{Binding Property.Vendor.Phone}" />
-
-                        </VerticalStackLayout>
+                        <Button
+                            Grid.Column="2"
+                            Command="{Binding CopyToClipboardCommand}"
+                            ImageSource="clipboard_paste.png"
+                            Text="Copy"
+                            FontSize="12"
+                            Padding="3,10"
+                            HorizontalOptions="Fill" />
 
                     </Grid>
 
+
                 </Border>
 
+
                 <Label
-                    Margin="0,20,0,0"
                     FontAttributes="Bold"
-                    FontSize="17"
+                    FontSize="19"
+                    Margin="0,5,0,0"
+                    Text="Location" />
+
+                <Border
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="7">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="{Binding Property.Address}" />
+
+                        <Label
+                            FontSize="12"
+                            Text="{Binding Property.Latitude, StringFormat='Latitude: {0}'}"
+                            TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                        <Label
+                            FontSize="12"
+                            Text="{Binding Property.Longitude, StringFormat='Longitude: {0}'}"
+                            TextColor="{AppThemeBinding Light=#777777, Dark=#AAAAAA}" />
+
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="10"
+                            Margin="0,7,0,0">
+
+                            <Button
+                                Grid.Column="0"
+                                Command="{Binding OpenMapMarkedCommand}"
+                                ImageSource="map.png"
+                                Text="View Map" />
+
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding OpenMapDirectionsCommand}"
+                                ImageSource="directions.png"
+                                Text="Directions" />
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="19"
+                    Margin="0,5,0,0"
+                    Text="Vendor" />
+
+                <Border
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="{Binding Property.Vendor.FullName}" />
+
+                        <HorizontalStackLayout Spacing="8">
+
+                            <Label
+                                FontFamily="FA-solid"
+                                Text="{x:Static fa:IconFont.Envelope}"
+                                TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" />
+
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Property.Vendor.Email}"
+                                TextColor="{AppThemeBinding Light=#555555, Dark=#CCCCCC}" />
+
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+
+                            <Label
+                                FontFamily="FA-solid"
+                                Text="{x:Static fa:IconFont.Phone}"
+                                TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" />
+
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Property.Vendor.Phone}"
+                                TextColor="{AppThemeBinding Light=#555555, Dark=#CCCCCC}" />
+
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="19"
+                    Margin="0,5,0,0"
                     Text="Listed By" />
 
                 <Border
-                    Padding="12"
-                    StrokeShape="RoundRectangle 12">
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
                     <Grid
-                        ColumnDefinitions="100,*"
+                        ColumnDefinitions="90,*"
                         ColumnSpacing="15">
 
-                        <Image
+                        <Border
                             Grid.Column="0"
-                            Aspect="AspectFill"
-                            HeightRequest="100"
-                            Source="{Binding Agent.ImageUrl}"
-                            WidthRequest="100" />
+                            HeightRequest="90"
+                            WidthRequest="90"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="45" />
+                            </Border.StrokeShape>
+
+                            <Image
+                                Aspect="AspectFill"
+                                HeightRequest="90"
+                                Source="{Binding Agent.ImageUrl}"
+                                WidthRequest="90" />
+
+                        </Border>
+
 
                         <VerticalStackLayout
                             Grid.Column="1"
@@ -448,73 +577,101 @@
 
                             <Label
                                 FontAttributes="Bold"
-                                FontSize="17"
+                                FontSize="18"
                                 Text="{Binding Agent.Name}" />
 
                             <Label
                                 FontSize="13"
-                                Text="{Binding Agent.Specialization}" />
+                                Text="{Binding Agent.Specialization}"
+                                TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" />
 
                             <Label
                                 FontSize="13"
-                                Text="{Binding Agent.AgentType}" />
+                                Text="{Binding Agent.AgentType}"
+                                TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" />
 
                             <Label
                                 FontSize="13"
-                                TextColor="Blue"
-                                Text="{Binding Agent.Email}">
+                                Text="{Binding Agent.Email}"
+                                TextColor="#3F51B5">
+
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding OpenEmailClientCommand}"
                                         CommandParameter="{Binding Agent.Email}" />
                                 </Label.GestureRecognizers>
+
                             </Label>
 
                             <Label
                                 FontSize="13"
-                                TextColor="Blue"
-                                Text="{Binding Agent.Phone}">
+                                Text="{Binding Agent.Phone}"
+                                TextColor="#3F51B5">
+
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding OpenPhoneOptionsCommand}"
                                         CommandParameter="{Binding Agent.Phone}" />
                                 </Label.GestureRecognizers>
+
                             </Label>
 
                         </VerticalStackLayout>
 
                     </Grid>
 
-                </Border>              
+                </Border>
+                
 
                 <Label
-                    Margin="0,15,0,0"
                     FontAttributes="Bold"
-                    FontSize="17"
+                    FontSize="19"
+                    Margin="0,5,0,0"
                     Text="About the Agent" />
 
-                <Label
-                    FontSize="14"
-                    LineBreakMode="WordWrap"
-                    Text="{Binding Agent.Description}" />
+                <Border
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    Stroke="{AppThemeBinding Light=#E2E4E8, Dark=#333333}"
+                    StrokeThickness="1">
 
-                <Grid
-                    ColumnDefinitions="Auto,*"
-                    ColumnSpacing="10"
-                    Margin="0,5,0,20">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
-                    <Label
-                        Grid.Column="0"
-                        FontAttributes="Bold"
-                        FontSize="13"
-                        Text="Opening Hours:" />
+                    <VerticalStackLayout Spacing="12">
 
-                    <Label
-                        Grid.Column="1"
-                        FontSize="13"
-                        Text="{Binding Agent.OpeningHours}" />
+                        <Label
+                            FontSize="14"
+                            LineBreakMode="WordWrap"
+                            LineHeight="1.3"
+                            Text="{Binding Agent.Description}"
+                            TextColor="{AppThemeBinding Light=#444444, Dark=#CCCCCC}" />
 
-                </Grid>
+                        <Grid
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="10">
+
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Opening Hours:" />
+
+                            <Label
+                                Grid.Column="1"
+                                FontSize="13"
+                                Text="{Binding Agent.OpeningHours}"
+                                TextColor="{AppThemeBinding Light=#555555, Dark=#BBBBBB}" />
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <BoxView HeightRequest="10" />
 
             </VerticalStackLayout>
 
