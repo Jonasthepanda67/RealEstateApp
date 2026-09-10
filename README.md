@@ -108,7 +108,8 @@ MockRepository
        └── SaveProperty()
 ```
 New properties are added to the in-memory collection, while existing properties are replaced when they share the same ID.
-⚠️ Persistence
+
+## ⚠️ Persistence
 * Property data changes are currently not persisted between application launches.
 * Restarting the application reloads the original mock data.
 * The service abstraction allows a future database or API-backed implementation to replace `MockRepository` without requiring the ViewModels to directly depend on a specific storage implementation.
