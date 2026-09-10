@@ -58,8 +58,8 @@ namespace RealEstateApp.ViewModels
 
         public void LoadSettings()
         {
-            Volume = Preferences.Get("volume", 0.6);
-            Pitch = Preferences.Get("pitch", 1.2);
+            Volume = Preferences.Get("volume", 0.6d);
+            Pitch = Preferences.Get("pitch", 1.2d);
             SortByClosest = Preferences.Get("sortByClosest", true);
 
             if (Volume < 0.1 || Volume > 2.0)
@@ -77,6 +77,9 @@ namespace RealEstateApp.ViewModels
         public void ResetSettings()
         {
             Preferences.Clear();
+            OnPropertyChanged(nameof(Volume));
+            OnPropertyChanged(nameof(Pitch));
+            OnPropertyChanged(nameof(SortByClosest));
         }
 
         #endregion
