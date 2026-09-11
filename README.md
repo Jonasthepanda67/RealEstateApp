@@ -4,7 +4,7 @@ A cross-platform real estate application built with **.NET MAUI**, **C#** and **
 
 The app lets users browse properties, view detailed listings, interact with agents, use location-based features and manage property information.
 
-> **Current version:** `V0.8.0`  
+> **Current version:** `v0.8.0`  
 > **Development branch:** `develop`
 
 ---
@@ -70,7 +70,7 @@ The app lets users browse properties, view detailed listings, interact with agen
 | **Font Awesome** | Icons |
 | **Open Sans** | Application font |
 
-### Platforms
+## Platforms
 
 - Android
 - iOS
@@ -95,7 +95,7 @@ Models
 
 ---
 
-💾 Data Storage
+## 💾 Data Storage
 The current version uses an in-memory mock repository rather than a database.
 ```text
 IPropertyService
@@ -116,7 +116,7 @@ New properties are added to the in-memory collection, while existing properties 
   
 ---
 
-🧭 Navigation
+## 🧭 Navigation
 The application uses .NET MAUI Shell navigation.
 The main navigation includes:
 🏠 Property List
@@ -150,7 +150,7 @@ About
 
 ---
 
-🚀 Getting Started
+## 🚀 Getting Started
 Prerequisites
 You will need:
 Visual Studio with .NET MAUI support
@@ -162,7 +162,7 @@ Clone the Repository
 git clone https://github.com/Jonasthepanda67/RealEstateApp.git
 cd RealEstateApp
 ```
-Open the Project
+To run the Project
 Open:
 ```text
 RealEstateApp.sln
@@ -171,7 +171,7 @@ Select your desired target platform and run the application.
 
 ---
 
-🖥️ Supported Platforms
+## 🖥️ Supported Platforms
 The current project configuration targets:
 Android
 iOS
@@ -181,105 +181,113 @@ Tizen support is present in the project configuration as commented-out code and 
 
 ---
 
-🎯 Current Tasks & Future Plans
-[ ] Persistent database storage
-[ ] User accounts with a proper backend
-[ ] Favorites / saved properties
-[ ] Advanced property filtering
-[ ] Search functionality
-[ ] Interactive in-app map view
-[ ] Property image uploading
-[ ] Agent/vendor management
-[ ] Property deletion
-[ ] Property type and tier selection in the add/edit form
-[ ] Improved validation
-[ ] Offline data persistence
+## 🎯 Current Tasks & Future Plans
+- [ ] Persistent database storage
+- [ ] User accounts with a proper backend
+- [ ] Favorites / saved properties
+- [ ] Advanced property filtering
+- [ ] Search functionality
+- [ ] Interactive in-app map view
+- [ ] Property image uploading
+- [ ] Agent/vendor management
+- [ ] Property deletion
+- [ ] Property type and tier selection in the add/edit form
+- [ ] Improved validation
+- [ ] Offline data persistence
 
 ---
 
-🚧 Known Issues
+## 🚧 Known Issues
 No major known issues are currently documented.
 The main architectural limitation is that property data is stored in memory and therefore resets when the application is restarted.
 
 ---
 
-🐞 Bug Reporting
+## 🐞 Bug Reporting
 Bug reporting is not currently enabled for this project.
 If you encounter an issue, feel free to open an issue on GitHub or make your own improvements to the project.
 
 ---
 
-🔗 Tags & Links
+## 🔗 Tags & Links
 Versions are based around the version numbers used for the project's pull requests.
 Tags are intended to be created after each version has been merged and finalized.
 | Version | Pull Request(s) | Tag      |
 | ------- | --------------- | -------- |
-| V0.1.0  | #1, #2          | `V0.1.0` |
-| V0.2.0  | #3, #4          | `V0.2.0` |
-| V0.3.0  | #5, #6          | `V0.3.0` |
-| V0.4.0  | #7, #8          | `V0.4.0` |
-| V0.5.0  | #12             | `V0.5.0` |
-| V0.6.0  | #13, #14, #15   | `V0.6.0` |
-| V0.7.0  | #16, #17        | `V0.7.0` |
-| V0.8.0  | #18, #19        | `V0.8.0` |
-> **Current version:** `V0.8.0`  
-> The `V0.8.0` tag is prepared above and can be created once the current version is finalized.
+| v0.1.0  | #1, #2          | [`v0.1.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.1.0) |
+| v0.2.0  | #3, #4          | [`v0.2.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.2.0) |
+| v0.3.0  | #5, #6          | [`v0.3.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.3.0) |
+| v0.4.0  | #7, #8, #9, #10 | [`v0.4.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.4.0) |
+| v0.5.0  | #11, #12        | [`v0.5.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.5.0) |
+| v0.6.0  | #13, #14, #15   | [`v0.6.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.6.0) |
+| v0.7.0  | #16, #17        | [`v0.7.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.7.0) |
+| v0.8.0  | #18, #19, #20   | [`v0.8.0`](https://github.com/Jonasthepanda67/RealEstateApp/releases/tag/v0.8.0) |
+> **Current version:** `v0.8.0`  
+> The `v0.8.0` tag is prepared above and can be created once the current version is finalized.
 
 ---
 
-📜 Changelog
-V0.8.0
-Added login functionality.
-Added logout functionality.
-Added persistent Preferences/Settings for user preferences.
-Improved styling across multiple pages.
-Added and refreshed application screenshots.
-Continued improving the application experience around stored user state.
-V0.7.0
-Added Wikipedia browser functionality for property neighborhoods.
-Added functionality for opening property contract files.
-Added multiple ways to share property information.
-V0.6.0
-Added vendor support to properties.
-Added vendors to the property details page.
-Added email, SMS and phone contact functionality.
-Added maps functionality.
-Added the ability to open a map for a property.
-Added directions functionality.
-V0.5.0
-Added a barometer feature.
-Added the ability to save barometer information.
-V0.4.0
-Added Text-to-Speech for property descriptions.
-Added start/stop controls for Text-to-Speech.
-Added battery status functionality.
-Added battery-level feedback.
-Added flashlight functionality.
-V0.3.0
-Added connectivity detection.
-Added connection-aware UI behaviour.
-Disabled or hid location-dependent functionality when a connection is unavailable.
-Added haptic feedback.
-Added vibration functionality.
-V0.2.0
-Added current-location retrieval.
-Added property distance calculations.
-Added property sorting by distance.
-Added geocoding functionality.
-Added automatic address handling based on the user's current location.
-Added multiple location-related quality-of-life improvements.
-V0.1.0
-Added GTA V-inspired properties and agents.
-Added additional property details to the models.
-Added the initial real-estate property and agent data foundation.
+## 📜 Changelog
+
+### V0.8.0
+- Added login functionality.
+- Added logout functionality.
+- Added persistent Preferences/Settings for user preferences.
+- Improved styling across multiple pages.
+- Added and refreshed application screenshots.
+- Continued improving the application experience around stored user state.
+
+### v0.7.0
+- Added Wikipedia browser functionality for property neighborhoods.
+- Added functionality for opening property contract files.
+- Added multiple ways to share property information.
+
+### v0.6.0
+- Added vendor support to properties.
+- Added vendors to the property details page.
+- Added email, SMS and phone contact functionality.
+- Added maps functionality.
+- Added the ability to open a map for a property.
+- Added directions functionality.
+
+### v0.5.0
+- Added a barometer feature.
+- Added the ability to save barometer information.
+
+### v0.4.0
+- Added Text-to-Speech for property descriptions.
+- Added start/stop controls for Text-to-Speech.
+- Added battery status functionality.
+- Added battery-level feedback.
+- Added flashlight functionality.
+
+### v0.3.0
+- Added connectivity detection.
+- Added connection-aware UI behaviour.
+- Disabled or hid location-dependent functionality when a connection is unavailable.
+- Added haptic feedback.
+- Added vibration functionality.
+
+### v0.2.0
+- Added current-location retrieval.
+- Added property distance calculations.
+- Added property sorting by distance.
+- Added geocoding functionality.
+- Added automatic address handling based on the user's current location.
+- Added multiple location-related quality-of-life improvements.
+
+### v0.1.0
+- Added GTA V-inspired properties and agents.
+- Added additional property details to the models.
+- Added the initial real-estate property and agent data foundation.
 
 ---
 
-👨‍💻 Author
+## 👨‍💻 Author
 Jonasthepanda
 GitHub: @Jonasthepanda67
 
 ---
 
-📄 License
+## 📄 License
 This project does not currently specify a license.
